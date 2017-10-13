@@ -1,29 +1,7 @@
 import * as util from "util";
-import { LoggerInstance } from "winston";
-import { Request, Response } from 'express';
-import BaseError from "../../error/BaseError";
+import { Response } from 'express';
 import { default as HttpError } from "../error/http/HttpError";
 import { HttpServerErrors, HttpSuccess } from "../error/http/HttpCode";
-
-export interface BaseRequest extends Request {
-  file?: any;
-  user?: any;
-  logger: LoggerInstance;
-
-  param(name: string, defaultValue?: any);
-}
-
-export interface BaseResponse extends Response {
-  error(status: number, error: Error): void;
-
-  error(status: number, error: BaseError): void;
-
-  error(status: number, errorMessage: string): void;
-
-  error(error: HttpError): void;
-
-  success(data?: any): void;
-}
 
 export default {
 

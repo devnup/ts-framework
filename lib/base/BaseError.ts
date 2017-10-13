@@ -5,12 +5,10 @@ export interface BaseErrorDetails {
 }
 
 export default class BaseError extends Error {
-  code: string;
   details: BaseErrorDetails;
 
-  constructor(message: string, code?: string, baseError?: Error) {
+  constructor(message: string, public code?: string, baseError?: Error) {
     super(`${code ? `${code} - ` : ''}${message}`);
-    this.code = code;
 
     // extending Error is weird and does not propagate `message`
     Object.defineProperty(this, 'message', {

@@ -1,4 +1,3 @@
-// TODO
 import * as util from "util";
 
 export interface IAssertionHelper {
@@ -6,8 +5,6 @@ export interface IAssertionHelper {
 
   toBoolean(fn: Function);
 }
-
-
 
 const AssertionHelper = function (fn: (req, res) => void) {
   return function (req, res, next) {

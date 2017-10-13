@@ -1,9 +1,10 @@
 import * as Raven from 'raven';
-import { BaseRequest, BaseResponse } from "../helpers/response";
 import { LoggerInstance } from 'winston';
 import SimpleLogger from '../../logger';
-import { HttpServerErrors } from "./http/HttpCode";
 import HttpError from "./http/HttpError";
+import { BaseRequest } from "../../base/BaseRequest";
+import { BaseResponse } from "../../base/BaseResponse";
+import { HttpServerErrors } from "./http/HttpCode";
 
 export interface ErrorReporterOptions {
   raven?: Raven.Client;

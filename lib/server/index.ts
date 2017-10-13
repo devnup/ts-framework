@@ -11,6 +11,8 @@ import { Router } from './router';
 import { cors, legacyParams, responseBinder } from './middlewares/index';
 import { default as errorMiddleware, ErrorDefinitions } from "./error/ErrorReporter";
 import SimpleLogger from "../logger/index";
+import { BaseRequest } from "../base/BaseRequest";
+import { BaseResponse } from "../base/BaseResponse";
 
 const Logger = SimpleLogger.getInstance();
 
@@ -21,7 +23,8 @@ const SENTRY_RELEASE = process.env.SENTRY_RELEASE ? process.env.SENTRY_RELEASE :
   }
 })();
 
-export { default as response, BaseRequest, BaseResponse } from './helpers/response';
+export { default as response } from './helpers/response';
+export { BaseRequest, BaseResponse, Logger };
 
 export interface ServerOptions {
   port: number,
@@ -38,7 +41,7 @@ export interface ServerOptions {
   };
   multer?: any,
   oauth?: {
-    model: any; // TODO: Specify the signatureO
+    model: any; // TODO: Specify the signature
     useErrorHandler?: boolean;
     continueMiddleware?: boolean;
     allowExtendedTokenAttributes?: boolean;
@@ -52,17 +55,13 @@ export interface ServerOptions {
   },
   logger?: LoggerInstance;
   errors?: ErrorDefinitions;
-
-  [key: string]: any;
 }
 
 export default class Server {
-  app: any;
   _server: any;
-  config: ServerOptions;
   logger: LoggerInstance;
 
-  constructor(config: ServerOptions, app?: any) {
+  constructor(public config: ServerOptions, public app?: any) {
     this.app = app || express();
     this.logger = config.logger;
 
@@ -87,7 +86,7 @@ export default class Server {
 
     // Enable the logger middleware
     if (this.logger) {
-      this.app.use((req, res, next) => {
+      this.app.use((req: BaseRequest, res, next) => {
         req.logger = this.logger;
         next();
       })
@@ -174,9 +173,14 @@ export default class Server {
     });
   }
 
+  /**
+   * Stops the server and closes the connection to the port.
+   *
+   * @returns {Promise<void>}
+   */
   public async stop() {
     await this.onShutdown();
-    if(this._server) {
+    if (this._server) {
       return this._server.close();
     }
   }
