@@ -3,6 +3,8 @@ import StatusController from "./controllers/StatusController";
 import MainDatabase from "./MainDatabase";
 
 export default class MainServer extends Server {
+  database: MainDatabase;
+
   constructor() {
     super({
       logger: Logger,
@@ -15,11 +17,19 @@ export default class MainServer extends Server {
       //   dsn: ''
       // }
     });
+
+    // Prepare the database instance as soon as possible to prevent clashes in
+    // model registration. We can connect to the real database later.
+    this.database = MainDatabase.getInstance({ logger: this.logger });
   }
 
+  /**
+   * Handles pre-startup routines, such as starting the database up.
+   *
+   * @returns {Promise<void>}
+   */
   async onStartup(): Promise<void> {
-    await MainDatabase.getInstance({ logger: this.logger }).connect();
-
+    await this.database.connect();
     this.logger.info(`Server listening in port: ${this.config.port}`)
   }
 }
