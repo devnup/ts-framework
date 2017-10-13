@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": false,
+    "noImplicitAny": false,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "outDir": "./build",
+    "declaration": false,
+    "allowJs": true,
+    "lib": [
+      "es6"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
