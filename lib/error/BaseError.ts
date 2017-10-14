@@ -24,7 +24,7 @@ export default class BaseError extends Error {
     this.details = details instanceof BaseErrorDetails ? details : new BaseErrorDetails(details);
   }
 
-  public toObject() {
+  public toObject(): any {
     return {
       message: this.message,
       stackId: this.stackId,
