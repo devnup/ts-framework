@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./lib",
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -14,10 +14,15 @@
     "declaration": false,
     "allowJs": true,
     "lib": [
-      "es6"
+      "es6",
+      "dom"
     ]
   },
+  "include": [
+    "./lib/**/*"
+  ],
   "exclude": [
+    "build",
     "node_modules"
   ]
 }
