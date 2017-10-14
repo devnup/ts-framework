@@ -77,7 +77,7 @@ The HTTP Server definitions.
 
 #### Utility classes
 
-- **SimpleLogger**: A simple Logger factory using [Winston](https://npmjs.org/package/winston).
+- **Logger**: A simple Logger based on [Winston](https://npmjs.org/package/winston).
 
 #### Base classes
 
