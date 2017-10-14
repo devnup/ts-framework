@@ -1,7 +1,7 @@
 ts-framework
 ============
 
-A minimalistic framework for typescript based applications.
+A minimalistic framework for typescript based applications, with async/await and decorators support.
 
 ## Getting Started
 
@@ -17,9 +17,51 @@ For example:
 npm install --save https://gitlab.devnup.com/npm/ts-framework.git#3471f9004798c35c5943cdf9160bd0ce856db62c 
 ``` 
 
-## Configuring Your Application
+#### TL;DR - A single file application
 
-Follow the [Configuration Guide](./GUIDE.md) for the basic boilerplate and project creation documentation.
+Configure a new Server instance and start listening on desired port. 
+
+```typescript
+import { Server, Logger, ServerOptions, HttpError } from 'ts-framework/server';
+
+// Define a sample middleware
+const isAuthenticated = async (req, res, next) => {
+  if(!req.session.userId) {
+     res.error(new HttpError('Unauthorized', 403))
+  }
+  next();
+};
+
+// Define the server configuration
+const server = new Server({
+  port: process.env.PORT || 3000,
+  routes: {
+    get: {
+      '/': async (req, res) => {
+        res.success({ message: 'Hello world!' })
+      },
+      '/admin': {
+        controller: async (req, res) =>  res.success({ message: 'Hello world!' })
+        filters: [isAuthenticated]
+      },
+    }
+  }, 
+});
+
+
+// Startup the simple server
+server.listen()
+  .then(() => Logger.info(`Server listening on port: ${this.options.port}`))
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+  });
+```
+
+#### Configuring Your Application
+
+Follow the [Configuration Guide](./GUIDE.md) for the basic boilerplate and a sample project configuration with
+Database and user authentication and data.
 
 
 ## Documentation
