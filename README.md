@@ -17,7 +17,7 @@ For example:
 npm install --save https://gitlab.devnup.com/npm/ts-framework.git#3471f9004798c35c5943cdf9160bd0ce856db62c 
 ``` 
 
-#### TL;DR - A single file application
+### TL;DR - A single file application
 
 Configure a new Server instance and start listening on desired port. 
 
@@ -58,7 +58,7 @@ server.listen()
   });
 ```
 
-#### Configuring Your Application
+### Configuring Your Application
 
 Follow the [Configuration Guide](./GUIDE.md) for the basic boilerplate and a sample project configuration with
 Database and user authentication and data.
@@ -89,8 +89,8 @@ The HTTP Server definitions.
     - `request.logger`: The Server logger instance, if supplied in the Server constructor.
 
 - **BaseResponse**: Extends Express.js response class for framework binding.
-    - `response.success(data)`: A shortcut for `response.status(200).json(data.toJSON() || data)`.
-    - `response.error(error)`: Handles errors before sending to response, cleaning the stack and assigned an unique stackId.
+    - `response.success(data: any)`: A shortcut for setting status as `200` and calling `data.toJSON()` if available.
+    - `response.error(error: String | Error)`: Handles errors before sending to response, cleaning the stack and assigned an unique `stackId`.
 
 #### Decorators
 
