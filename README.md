@@ -14,7 +14,7 @@ SemVer tag or git branch.
 For example:
 
 ```bash
-npm install --save https://gitlab.devnup.com/npm/ts-framework.git#3471f9004798c35c5943cdf9160bd0ce856db62c 
+npm install --save https://gitlab.devnup.com/npm/ts-framework.git#GIT_REV_HASH 
 ``` 
 
 ### TL;DR - A single file application
@@ -124,4 +124,4 @@ be used in classes that extends `BaseModel`.
 
 ## License
 
-The project is licensed under [MIT License](./LICENSE.md).
+The project is licensed under the [MIT License](./LICENSE.md).
