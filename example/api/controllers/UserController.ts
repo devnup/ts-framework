@@ -9,5 +9,4 @@ export default class UserController {
     // TODO: const user = await User.create({name: req.body.name, email: req.body.email});
     throw new Error('Not implemented: "POST users/"');
   }
-
 }

@@ -154,14 +154,64 @@ GET /status
 
 ### Model
 
-// TODO
+The framework is based on the [Mongoose Advanced Schemas](http://mongoosejs.com/docs/advanced_schemas.html) for ES6. The 
+idea is to wrap your model in a class-oriented approach.
+
+```typescript
+import { Model, BaseModel } from "ts-framework/database";
+
+const UserSchema =  new Schema({
+  name: {
+    type: String
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ['active', 'inactive'],
+    default: 'active',
+  }
+});
+
+@Model("Users")
+class UserModel extends BaseModel {
+  
+  /**
+   * The schema definition is required and must be static. 
+   */
+  static Schema = UserSchema;
+  
+  /**
+   * Example static method: finds an user with specified email.
+   */
+  static findByEmail(email: string): Promise<UserModel> {
+    return this.findOne({ email, status: 'active'});
+  }
+  
+  /**
+   * Example instance method: sets user instance name.
+   */
+  async setName(name: string) {
+    return this.update({ $set: { name }});
+  }
+}
+
+// Register in a Database isntance
+export default database.model(UserModel);
+```
 
 
 
 ## Documentation
 
-It's in the roadmap an automated documentation based on JSDocs. Currently there are
-only the JSDocs tags inside of some key class and components.
+It's in the roadmap an automated documentation based on JSDocs. Currently there are only the JSDocs tags inside of some 
+key class and components.
 
 
 ## License
