@@ -1,12 +1,12 @@
 ts-framework
 ============
 
-A minimalistic framework for typescript based Application.
+A minimalistic framework for typescript based applications.
 
 ## Installing the Alpha Preview
 
-The currently API is considered to be "alpha" so it can change at any time. 
-To ensure your project won't crash, refer to the specific commit, instead of a 
+The currently API is considered to be "alpha" so it can change at any time. To 
+ensure your project won't crash, refer to the specific commit, instead of a 
 SemVer tag or git branch.
 
 For example:
@@ -18,8 +18,8 @@ npm install --save https://gitlab.devnup.com/npm/ts-framework.git#3471f9004798c3
 
 ## Configuring the Server
 
-Start by extending the default server. It's easier to control its behaviour by extending 
-the **Server** base class.
+Start by extending the default server. It's easier to control its behaviour by
+extending the **Server** base class.
 
 ```typescript
 import {Server} from 'ts-framework';
@@ -33,8 +33,9 @@ export default class MainServer extends Server {
 } 
 ```
 
-The main entrypoint for your application should be a **Server** instance. For instance,
-inside a ```start.ts``` file, initialize and listen in the supplied port.
+The main entrypoint for your application should be a **Server** instance. For 
+instance, inside a ```start.ts``` file, initialize and listen in the supplied 
+port.
 
 ```typescript
 import MainServer from './server';
@@ -52,43 +53,56 @@ server.listen().catch(error => {
 Configuring the Database
 ========================
 
-The framework comes with a thin abstraction layer over the great [Mongoose ODM](https://npmjs.org/package/mongoose).
-The goal of this layer is to provide a simple and consistent base class, that can be extended
-in the same way as the **Server** was done in the last section. 
+The framework comes with a thin abstraction layer over the great 
+[Mongoose ODM](https://npmjs.org/package/mongoose). The goal of this layer is to
+provide a simple and consistent base class, that can be extended in the same way 
+as the **Server** was done in the last section. 
 
 ```typescript
 import {Database} from 'ts-framework';
 
 export default class MainDatabase extends Database {
+  constructor(options: DatabaseOptions) {
+    super(options);
+    // Some post initialization routines...
+  }
   
+  async connect() {
+    // Do some pre-connection routines...
+    await super.connect();
+    // Do some post-connection routines...
+  }
 }
 ```
 
 Now, you can bind the database initialization to the MainServer instance.
 
 ```typescript
-import {Server, ServerOptions} from 'ts-framework';
+import {Server, ServerOptions, Logger} from 'ts-framework';
 import MainDatabase from './database';
 
 export default class MainServer extends Server {
   database: MainDatabase;
 
   constructor(options: ServerOptions) {
-    super(options);
+    super({
+      // Recommended: Start with the SimpleLogger to ease the debug process
+      logger: Logger,
+      ...options
+    });
     
     // Prepare the database to be connected later
     this.database = new MainDatabase({
+      logger: this.logger,
       url: process.env.MONGO_URL || 'mongodb://localhost:27017/example'
     })
   }
-  
 
   /** For example, extend the onStartup method to handle pre-listen routines */
   async onStartup() {
     // Connect to database instance
     await this.database.connect();
-    
-    console.log(`Server listening on port: ${this.options.port}`);
+    this.logger.info(`Server listening on port: ${this.options.port}`);
   }
 } 
 ```
