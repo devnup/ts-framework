@@ -1,5 +1,5 @@
-import { BaseModel } from "../../../../lib/database/model";
-import { Model } from "../../../../lib/database/decorators";
+import { BaseModel } from "../../../../lib/database";
+import { Model } from "../../../../lib/database";
 import UserSchema from "./UserSchema";
 import MainDatabase from "../../MainDatabase";
 

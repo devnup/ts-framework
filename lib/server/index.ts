@@ -13,6 +13,7 @@ import { default as errorMiddleware, ErrorDefinitions } from "./error/ErrorRepor
 import SimpleLogger from "../logger/index";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
+import { Controller, Get, Post, Put, Delete } from './router/decorators';
 
 const Logger = SimpleLogger.getInstance();
 
@@ -24,7 +25,10 @@ const SENTRY_RELEASE = process.env.SENTRY_RELEASE ? process.env.SENTRY_RELEASE :
 })();
 
 export { default as response } from './helpers/response';
-export { BaseRequest, BaseResponse, Logger };
+export {
+  BaseRequest, BaseResponse, Logger,
+  Controller, Get, Post, Put, Delete
+};
 
 export interface ServerOptions {
   port: number,

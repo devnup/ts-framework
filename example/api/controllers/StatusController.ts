@@ -1,5 +1,5 @@
 import * as Package from 'pjson';
-import { Controller, Get } from "../../../lib/server/router/decorators";
+import { Controller, Get } from "../../../lib/server";
 
 @Controller()
 export default class StatusController {

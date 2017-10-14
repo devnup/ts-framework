@@ -1,5 +1,5 @@
 import User from '../models/user/User';
-import { Controller, Post } from "../../../lib/server/router/decorators";
+import { Controller, Post } from "../../../lib/server";
 
 @Controller('/users')
 export default class UserController {

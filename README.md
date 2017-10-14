@@ -23,9 +23,24 @@ Start by extending the default server. It's easier to control its behaviour by
 extending the **Server** base class.
 
 ```typescript
-import {Server} from 'ts-framework';
+import { Server, ServerOptions } from 'ts-framework/server';
 
 export default class MainServer extends Server {
+
+  constructor(options?: ServerOptions) {
+    super({
+      port: process.env.PORT || 3000
+      routes: {
+        get: {
+          '/': (req, res) => this.helloWorld(req, res)
+        }
+      },
+      ...options,
+    });
+  }
+  helloWorld(req, res) {
+    res.json({ message: 'HelloWorld!' })
+  }
 
   /** For example, extend the onStartup method to handle post-listen routines */
   async onStartup() {
@@ -42,7 +57,7 @@ port.
 ```typescript
 import MainServer from './server';
 
-const server = new MainServer({ port: process.env.PORT || 3000 });
+const server = new MainServer();
 
 // Start listening for requests...
 server.listen().catch(error => {
@@ -61,14 +76,9 @@ provide a simple and consistent base class, that can be extended in the same way
 as the **Server** was done in the last section. 
 
 ```typescript
-import {Database} from 'ts-framework';
+import { Database } from 'ts-framework/database';
 
 export default class MainDatabase extends Database {
-  constructor(options: DatabaseOptions) {
-    super(options);
-    // Some post initialization routines...
-  }
-  
   async connect() {
     // Do some pre-connection routines...
     await super.connect();
@@ -80,7 +90,8 @@ export default class MainDatabase extends Database {
 Now, you can bind the database initialization to the MainServer instance.
 
 ```typescript
-import {Server, ServerOptions, Logger} from 'ts-framework';
+import { Server, ServerOptions, Logger } from 'ts-framework/server';
+import { StatusController } from './controllers/StatusController'
 import MainDatabase from './database';
 
 export default class MainServer extends Server {
@@ -90,12 +101,14 @@ export default class MainServer extends Server {
     super({
       // Recommended: Start with the SimpleLogger to ease the debug process
       logger: Logger,
+      port: process.env.PORT || 3000,
+      controllers: { status: StatusController },
       ...options
     });
     
     // Prepare the database to be connected later
     this.database = new MainDatabase({
-      logger: this.logger,
+      logger: Logger,
       url: process.env.MONGO_URL || 'mongodb://localhost:27017/example'
     })
   }
@@ -160,6 +173,9 @@ idea is to wrap your model in a class-oriented approach.
 ```typescript
 import { Model, BaseModel } from "ts-framework/database";
 
+/**
+ * A simple user schema definition. 
+ */
 const UserSchema =  new Schema({
   name: {
     type: String

@@ -18,8 +18,6 @@ export {
   BaseModel
 }
 
-export { BaseModel as BaseDAO };
-
 export class DatabaseError extends BaseError {
 
 }
