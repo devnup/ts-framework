@@ -58,10 +58,10 @@ server.listen()
   });
 ```
 
-### Configuring Your Application
+### Usage Guide
 
-Follow the [Configuration Guide](./GUIDE.md) for the basic boilerplate and a sample project configuration with
-Database and user authentication and data.
+Follow the [Usage Guide](./GUIDE.md) for the basic boilerplate and a sample project configuration with
+Database and user authentication samples.
 
 
 ## Documentation
