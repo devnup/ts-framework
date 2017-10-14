@@ -7,7 +7,7 @@ export default class StatusController {
 
   @Get('/')
   static getStatus(req, res) {
-    res.json({
+    res.success({
       name: Package.name,
       version: Package.version,
       environment: process.env.NODE_ENV || 'development',

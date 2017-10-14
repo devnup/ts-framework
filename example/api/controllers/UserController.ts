@@ -6,7 +6,23 @@ export default class UserController {
 
   @Post('/')
   static async create(req, res) {
-    // TODO: const user = await User.create({name: req.body.name, email: req.body.email});
-    throw new Error('Not implemented: "POST users/"');
+    const user = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    return res.success(user);
+  }
+
+  @Post('/:id')
+  static async findAndUpdate(req, res) {
+    const user = await User.findOneAndUpdate({
+      email: req.body.email
+    }, {
+      $set: { name: req.body.name }
+    });
+
+    return res.success(user);
   }
 }
