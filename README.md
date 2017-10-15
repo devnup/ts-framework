@@ -22,36 +22,24 @@ npm install --save https://gitlab.devnup.com/npm/ts-framework.git#GIT_REV_HASH
 Configure a new Server instance and start listening on desired port. 
 
 ```typescript
-import { Server, Logger, ServerOptions, HttpError } from 'ts-framework/server';
-
-// Define a sample middleware
-const isAuthenticated = async (req, res, next) => {
-  if(!req.session.userId) {
-     res.error(new HttpError('Unauthorized', 403))
-  }
-  next();
-};
+import Server, { Logger, BaseRequest, BaseResponse } from 'ts-framework';
 
 // Define the server configuration
 const server = new Server({
-  port: process.env.PORT || 3000,
+  port: process.env.PORT as any || 3000,
   routes: {
     get: {
-      '/': async (req, res) => {
+      '/': async (req: BaseRequest, res: BaseResponse) => {
         res.success({ message: 'Hello world!' })
-      },
-      '/admin': {
-        controller: async (req, res) =>  res.success({ message: 'Hello world!' })
-        filters: [isAuthenticated]
-      },
+      }
     }
-  }, 
+  },
 });
 
 
 // Startup the simple server
 server.listen()
-  .then(() => Logger.info(`Server listening on port: ${this.options.port}`))
+  .then(() => Logger.info(`Server listening on port: ${server.config.port}`))
   .catch(error => {
     console.error(error);
     process.exit(1);
