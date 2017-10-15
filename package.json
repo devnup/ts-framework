@@ -46,7 +46,8 @@
     "source-map-support": "^0.5.0",
     "typescript": "^2.5.3",
     "urijs": "^1.19.0",
-    "winston": "^2.4.0"
+    "winston": "^2.4.0",
+    "winston-raven-sentry": "^1.0.1"
   },
   "devDependencies": {
     "@types/jest": "^21.1.2",
