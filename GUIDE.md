@@ -103,7 +103,7 @@ export default class MainServer extends Server {
   async onStartup() {
     // Connect to database instance
     await this.database.connect();
-    this.logger.info(`Server listening on port: ${this.options.port}`);
+    this.logger.info(`Server listening on port: ${this.config.port}`);
   }
 } 
 ```
