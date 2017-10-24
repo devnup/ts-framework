@@ -141,10 +141,11 @@ export default class ServerRouter {
         let ctrl = this.registerController(routes, r);
 
         // Add the filters wrapper instance to the routes map
-        if (routes[r].filters) {
+        if (routes[r].filters && routes[r].filters.length) {
 
           // Validate all filters
           if (routes[r].filters.filter(f => !f).length > 0) {
+            console.log(routes[r].filters);
             throw new Error('Invalid filters for route: ' + method.toUpperCase() + ' ' + r);
           }
 

@@ -2,18 +2,19 @@
   "name": "ts-framework",
   "version": "0.0.1",
   "description": "A minimalistic web framework for TS",
-  "main": "dist/server/index.js",
   "author": "Luis Brito <luis@devnup.com>",
   "license": "MIT",
-  "typings": "dist/types/ts-framework.d.ts",
+  "main": "./dist/server/index.js",
+  "typings": "./dist/types/server/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "postinstall": "node node_modules/.bin/tsc",
-    "clean": "node node_modules/.bin/rimraf dist/",
+    "build": "node node_modules/.bin/tsc",
+    "clean": "node node_modules/.bin/rimraf ./dist/",
     "test": "node node_modules/.bin/jest --config jest.json",
-    "precommit": "npm run -s clean && npm install && npm test"
+    "precommit": "npm test",
+    "postinstall": "npm run -s clean && npm run -s build"
   },
   "dependencies": {
     "@types/async": "^2.0.44",

@@ -30,6 +30,8 @@ export {
   Controller, Get, Post, Put, Delete
 };
 
+export { default as Database, DatabaseOptions } from '../database';
+
 export interface ServerOptions {
   port: number,
   secret?: string,

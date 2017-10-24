@@ -12,6 +12,7 @@
     "inlineSources": true,
     "outDir": "./dist",
     "declaration": true,
+    "removeComments": false,
     "declarationDir": "dist/types",
     "lib": [
       "es6",
