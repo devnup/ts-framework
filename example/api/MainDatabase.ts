@@ -1,5 +1,5 @@
 import * as Package from "pjson";
-import Database, { DatabaseOptions } from "../../lib/database";
+import { Database, DatabaseOptions } from "ts-framework";
 
 export default class MainDatabase extends Database {
   static instance: MainDatabase;

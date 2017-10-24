@@ -1,5 +1,5 @@
 import User from '../models/user/User';
-import { Controller, Post } from "../../../lib/server";
+import { Controller, Post } from "ts-framework";
 
 @Controller('/users')
 export default class UserController {

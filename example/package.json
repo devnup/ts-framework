@@ -9,6 +9,7 @@
   "dependencies": {
     "pjson": "^1.0.9",
     "reflect-metadata": "^0.1.10",
+    "ts-framework": "file:../",
     "ts-node": "^3.3.0"
   }
 }

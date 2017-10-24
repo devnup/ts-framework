@@ -1,4 +1,4 @@
-import Server, { Logger } from "../../lib/server";
+import Server, { Logger } from "ts-framework";
 import StatusController from "./controllers/StatusController";
 import MainDatabase from "./MainDatabase";
 
