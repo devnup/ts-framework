@@ -31,7 +31,7 @@ export default class MainServer extends Server {
   /** For example, extend the onStartup method to handle post-listen routines */
   async onStartup() {
     // This method will be called right after the server.listen() has been called.
-    console.log(`Server listening on port: ${this.options.port}`);
+    console.log(`Server listening on port: ${this.config.port}`);
   }
 } 
 ```
@@ -103,7 +103,7 @@ export default class MainServer extends Server {
   async onStartup() {
     // Connect to database instance
     await this.database.connect();
-    this.logger.info(`Server listening on port: ${this.options.port}`);
+    this.logger.info(`Server listening on port: ${this.config.port}`);
   }
 } 
 ```
