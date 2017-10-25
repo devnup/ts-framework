@@ -25,12 +25,11 @@ const SENTRY_RELEASE = process.env.SENTRY_RELEASE ? process.env.SENTRY_RELEASE :
 })();
 
 export { default as response } from './helpers/response';
+
 export {
   BaseRequest, BaseResponse, Logger,
   Controller, Get, Post, Put, Delete
 };
-
-export { default as Database, DatabaseOptions } from '../database';
 
 export interface ServerOptions {
   port: number,

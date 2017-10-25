@@ -4,8 +4,8 @@
   "description": "A minimalistic web framework for TS",
   "author": "Luis Brito <luis@devnup.com>",
   "license": "MIT",
-  "main": "./dist/server/index.js",
-  "typings": "./dist/types/server/index.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/types/index.d.ts",
   "files": [
     "dist"
   ],
