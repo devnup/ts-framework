@@ -1,10 +1,9 @@
 import * as Raven from 'raven';
+import { BaseRequest, BaseResponse } from "../helpers/response";
 import { LoggerInstance } from 'winston';
 import SimpleLogger from '../../logger';
-import HttpError from "./http/HttpError";
-import { BaseRequest } from "../../base/BaseRequest";
-import { BaseResponse } from "../../base/BaseResponse";
 import { HttpServerErrors } from "./http/HttpCode";
+import HttpError from "./http/HttpError";
 
 export interface ErrorReporterOptions {
   raven?: Raven.Client;
@@ -67,7 +66,9 @@ export class ErrorReporter {
     if (error instanceof HttpError) {
       serverError = error as any;
     } else {
-      serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR);
+      serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
+        code: error.code ? error.code : undefined
+      });
       serverError.stack = error.stack || serverError.stack;
     }
 
@@ -75,7 +76,7 @@ export class ErrorReporter {
     if (this.options.raven) {
       this.options.raven.captureException(serverError, {
         req: req,
-        level: 'error',
+        level: serverError.status >= 500 ? 'error' : 'warning',
         tags: { stackId: serverError.stackId }
       } as any);
     }
