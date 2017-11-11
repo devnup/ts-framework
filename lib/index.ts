@@ -2,14 +2,14 @@ import Server, {
   ServerOptions, response,
   BaseRequest, BaseResponse, Logger,
   Controller, Get, Post, Put, Delete,
-  Http, HttpError,
+  HttpCode, HttpError,
 } from './server';
 
 export {
   ServerOptions, response,
   BaseRequest, BaseResponse, Logger,
   Controller, Get, Post, Put, Delete,
-  Http, HttpError,
+  HttpCode, HttpError,
 };
 
 export {

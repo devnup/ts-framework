@@ -14,7 +14,7 @@ import SimpleLogger from "../logger/index";
 import { BaseRequest } from "../base/BaseRequest";
 import { BaseResponse } from "../base/BaseResponse";
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
-import Http from './error/http/HttpCode';
+import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
 
 const Logger = SimpleLogger.getInstance();
@@ -31,7 +31,7 @@ export { default as response } from './helpers/response';
 export {
   BaseRequest, BaseResponse, Logger,
   Controller, Get, Post, Put, Delete,
-  Http, HttpError,
+  HttpCode, HttpError,
 };
 
 export interface ServerOptions {
