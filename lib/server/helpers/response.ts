@@ -48,13 +48,13 @@ export default {
   },
 
   success(res: Response) {
-    return (data: any = {}) => {
-      if (util.isArray(data)) {
+    return (data?: any) => {
+      if (data && util.isArray(data)) {
         data = data.map(d => (d && util.isFunction(d.toJSON)) ? d.toJSON() : d);
-      } else if (util.isFunction(data.toJSON)) {
+      } else if (data && util.isFunction(data.toJSON)) {
         data = data.toJSON();
       }
-      res.status(HttpSuccess.OK).json(data)
+      res.status(HttpSuccess.OK).json(data || {})
     }
   }
 };
