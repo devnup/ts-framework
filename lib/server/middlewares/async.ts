@@ -15,7 +15,11 @@ const asyncMiddleware = (fns: Function | Function[]) => {
       }
       throw new Error(msg);
     }
-    return Promise.resolve(fn(req, res, next)).catch(next);
+    try {
+      return Promise.resolve(fn(req, res, next)).catch(next);
+    } catch (error) {
+      next(error);
+    }
   })
 };
 
