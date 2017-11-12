@@ -18,7 +18,8 @@ export {
   Model,
   Schema,
   Plugins,
-  BaseModel
+  BaseModel,
+  BaseDAO
 } from './database';
 
 export default Server;
