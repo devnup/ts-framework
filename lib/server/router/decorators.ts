@@ -2,7 +2,7 @@ import { BaseController } from "./controller";
 
 /* Simple factory for generating the routes decorators */
 const routeDecoratorFactory = (method): Function => {
-  return (route: string, filters?: Function[]) => {
+  return (route: string, filters: Function[] = []) => {
     return function getRouteDecorator(target, key, descriptor) {
       target.routes = target.routes || {};
       target.routes[method] = target.routes[method] || {};
@@ -21,7 +21,7 @@ const routeDecoratorFactory = (method): Function => {
  * @param {string} route The route to be assigned to all methods of decorated class.
  * @param {Function[]} filters The filters to be called before all methods of decorated class.
  */
-export const Controller = (route?: string, filters?: Function[]) => {
+export const Controller = (route?: string, filters: Function[] = []) => {
   return function controllerDecorator<T extends BaseController>(constructor: T) {
     return class extends constructor {
       static baseRoute = route;
