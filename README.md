@@ -57,6 +57,26 @@ Database and user authentication samples.
 It's in the roadmap an automated documentation based on JSDocs. Currently there are only the JSDocs tags inside of some 
 key class and components.
 
+Internal components:
+
+- Logger
+- Database
+- Router
+  - Controllers
+  - Filters
+  - Responses
+
+External components already available as middlewares: 
+
+- OAuth 2.0 (express-oauth2-server)
+- Sentry (RavenJS)
+- CORS (express/cors)
+- Multipart (express/multer)
+- User Agent (express-useragent and request-ip)
+- Body Parser (express/body-parser)
+- Method Override (express/method-override)
+- Cookie Parser (express/cookie-parser)
+
 
 ### Server
 
@@ -82,15 +102,15 @@ The HTTP Server definitions.
 
 #### Decorators
 
-- **@Controller(baseRoute: string, middlewares: Function[])**: Decorator for controller classes.
+- **@Controller(baseRoute: string, middlewares?: Function[])**: Decorator for controller classes.
 
-- **@Get(route: string, middlewares: Function[])**: Decorator for GET methods, must be static.
+- **@Get(route: string, middlewares?: Function[])**: Decorator for GET methods, must be static.
 
-- **@Post(route: string, middlewares: Function[])**: Decorator for POST methods, must be static.
+- **@Post(route: string, middlewares?: Function[])**: Decorator for POST methods, must be static.
 
-- **@Put(route: string, middlewares: Function[])**: Decorator for PUT methods, must be static.
+- **@Put(route: string, middlewares?: Function[])**: Decorator for PUT methods, must be static.
 
-- **@Delete(route: string, middlewares: Function[])**: Decorator for DELETE methods, must be static.
+- **@Delete(route: string, middlewares?: Function[])**: Decorator for DELETE methods, must be static.
 
 
 ### Database
