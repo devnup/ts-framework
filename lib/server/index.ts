@@ -1,6 +1,7 @@
 import * as Raven from 'raven';
 import * as multer from 'multer';
 import * as express from 'express';
+import * as requestIp from 'request-ip';
 import * as userAgent from 'express-useragent';
 import * as Git from 'git-rev-sync';
 import * as bodyParser from 'body-parser';
@@ -119,10 +120,15 @@ export default class Server {
     }
 
     // Handle user agent middleware
-    if(this.config.userAgent) {
+    if (this.config.userAgent) {
       if (this.logger) {
         this.logger.info('Initializing server middleware: User Agent');
       }
+
+      // Parses request for the real IP
+      this.app.use(requestIp.mw());
+
+      // Parses request user agent information
       this.app.use(userAgent.express());
     }
 
@@ -149,6 +155,7 @@ export default class Server {
       this.logger.info('Initializing server middleware: Router');
     }
 
+    // Builds the route map and binds to current express application
     Router.build(this.config.controllers, this.config.routes, {
       app: this.app,
       path: this.config.path,
@@ -162,6 +169,7 @@ export default class Server {
         this.logger.info('Initializing server middleware: OAuth2');
       }
 
+      // Prepare OAuth 2.0 server instance and token endpoint
       this.app.oauth = new OAuthServer(oauth);
       this.app.post('/oauth/token', this.app.oauth.token(token));
     }
