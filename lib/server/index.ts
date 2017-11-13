@@ -1,6 +1,7 @@
 import * as Raven from 'raven';
 import * as multer from 'multer';
 import * as express from 'express';
+import * as userAgent from 'express-useragent';
 import * as Git from 'git-rev-sync';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
@@ -39,6 +40,7 @@ export interface ServerOptions {
   secret?: string,
   routes?: any,
   cors?: boolean,
+  userAgent?: boolean,
   controllers?: object;
   path?: {
     filters?: string;
@@ -114,6 +116,11 @@ export default class Server {
         this.logger.info('Initializing server middleware: Multer');
       }
       this.app.use(multer(this.config.multer).single('picture'));
+    }
+
+    // Handle user agent middleware
+    if(this.config.userAgent) {
+      this.app.use(userAgent.express());
     }
 
     // Enable basic express middlewares

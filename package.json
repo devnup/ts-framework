@@ -34,6 +34,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-oauth-server": "^2.0.0",
+    "express-useragent": "^1.0.8",
     "git-rev-sync": "^1.9.1",
     "hat": "^0.0.3",
     "lodash": "^4.17.4",

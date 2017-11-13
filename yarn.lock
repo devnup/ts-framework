@@ -1175,6 +1175,10 @@ express-oauth-server@^2.0.0:
     express "^4.13.3"
     oauth2-server "3.0.0"
 
+express-useragent@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/express-useragent/-/express-useragent-1.0.8.tgz#051ef6a3386d8ecb62cd2b8c169ad109d06cb57d"
+
 express@^4.13.3, express@^4.16.2:
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
