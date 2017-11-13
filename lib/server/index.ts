@@ -120,6 +120,9 @@ export default class Server {
 
     // Handle user agent middleware
     if(this.config.userAgent) {
+      if (this.logger) {
+        this.logger.info('Initializing server middleware: User Agent');
+      }
       this.app.use(userAgent.express());
     }
 
