@@ -13,8 +13,7 @@
     "build": "./node_modules/.bin/tsc",
     "clean": "./node_modules/.bin/rimraf ./dist/",
     "test": "./node_modules/.bin/jest --config jest.json",
-    "precommit": "npm test",
-    "postinstall": "npm run -s clean && npm run -s build"
+    "precommit": "npm test"
   },
   "dependencies": {
     "@types/async": "^2.0.44",
