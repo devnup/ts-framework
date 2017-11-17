@@ -18,6 +18,7 @@ import { BaseResponse } from "../base/BaseResponse";
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
+import { BaseJob } from '../jobs/BaseJob';
 
 const Logger = SimpleLogger.getInstance();
 
@@ -49,6 +50,10 @@ export interface ServerOptions {
   };
   sentry?: {
     dsn: string;
+  };
+  startup?: {
+    pipeline: BaseJob[];
+    [key: string]: any;
   };
   multer?: any,
   oauth?: {
@@ -212,6 +217,27 @@ export default class Server {
     }
   }
 
+  /**
+   * Runs the server statup jobs, wil crash if any fails.
+   */
+  protected async runStartupJobs() {
+    const jobs = this.config.startup || {} as any;
+    const pipeline = jobs.pipeline || [];
+
+    if (pipeline.length) {
+      if (this.logger) {
+        this.logger.debug('Running startup pipeline', { jobs: pipeline.map(p => p.name || 'unknown') });
+      }
+
+      // TODO: Run all startup jobs in series
+      await Promise.all(jobs.pipeline.map(async job => job.run(this)));
+
+      if (this.logger) {
+        this.logger.debug('Successfully ran all startup jobs');
+      }
+      return;
+    }
+  }
 
   /**
    * Handles post-startup routines, may be extended for initializing databases and services.
@@ -219,7 +245,15 @@ export default class Server {
    * @returns {Promise<void>}
    */
   public async onStartup() {
-    return;
+    try {
+      await this.runStartupJobs();
+    } catch (error) {
+      if (this.logger) {
+        this.logger.error('Unknown startup error: ' + error.message, error);
+      }
+      process.exit(-1);
+      return;
+    }
   }
 
   /**

@@ -12,6 +12,8 @@ export {
   HttpCode, HttpError,
 };
 
+export { default as BaseJob } from './jobs/BaseJob';
+
 export {
   default as Database,
   DatabaseOptions,
