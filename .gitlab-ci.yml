@@ -1,0 +1,31 @@
+stages:
+- build
+- test
+
+build:
+  image: node:8
+  type: build
+  script:
+  - npm install -g yarn
+  - yarn install
+  artifacts:
+    expire_in: 1d
+    paths:
+    - node_modules/
+  tags:
+  - alpine
+
+test:
+  image: node:8
+  type: test
+  script:
+  - npm install -g yarn
+  - yarn test
+  dependencies:
+  - build
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - coverage/
+  tags:
+  - alpine
