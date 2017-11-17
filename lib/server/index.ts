@@ -18,7 +18,7 @@ import { BaseResponse } from "../base/BaseResponse";
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
-import { BaseJob } from '../jobs/BaseJob';
+import BaseJob from '../jobs/BaseJob';
 
 const Logger = SimpleLogger.getInstance();
 

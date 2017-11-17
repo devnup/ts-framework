@@ -6,6 +6,7 @@ import { BaseResponse } from "../base/BaseResponse";
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
+import BaseJob from '../jobs/BaseJob';
 declare const Logger: LoggerInstance;
 export { default as response } from './helpers/response';
 export { BaseRequest, BaseResponse, Logger, Controller, Get, Post, Put, Delete, HttpCode, HttpError };
@@ -22,6 +23,10 @@ export interface ServerOptions {
     };
     sentry?: {
         dsn: string;
+    };
+    startup?: {
+        pipeline: BaseJob[];
+        [key: string]: any;
     };
     multer?: any;
     oauth?: {
@@ -58,6 +63,10 @@ export default class Server {
      * @returns {Promise<void>}
      */
     stop(): Promise<any>;
+    /**
+     * Runs the server statup jobs, wil crash if any fails.
+     */
+    protected runStartupJobs(): Promise<void>;
     /**
      * Handles post-startup routines, may be extended for initializing databases and services.
      *
