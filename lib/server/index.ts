@@ -108,6 +108,41 @@ export default class Server {
       })
     }
 
+    // Handle post initialization routines
+    this.onAppReady();
+  }
+
+  /**
+   * Starts listening on the configured port.
+   *
+   * @returns {Promise<ServerOptions>}
+   */
+  public listen(): Promise<ServerOptions> {
+    return new Promise((resolve, reject) => {
+      // Get http server instance
+      this._server = this.app.listen(this.config.port, () => {
+        this.onStartup().then(() => resolve(this.config)).catch((error: Error) => reject(error));
+      }).on('error', (error: Error) => reject(error))
+    });
+  }
+
+  /**
+   * Stops the server and closes the connection to the port.
+   *
+   * @returns {Promise<void>}
+   */
+  public async stop() {
+    await this.onShutdown();
+    if (this._server) {
+      return this._server.close();
+    }
+  }
+
+  /**
+   * Handles middleware initialization stuff.
+   */
+  public onAppReady() {
+
     // Enable the CORS middleware
     if (this.config.cors) {
       if (this.logger) {
@@ -161,6 +196,15 @@ export default class Server {
       this.logger.info('Initializing server middleware: Router');
     }
 
+    // Server is ready, handle post application routines
+    this.register();
+  }
+
+  /**
+   * Registers the server routes and error handlers.
+   */
+  protected register() {
+
     // Builds the route map and binds to current express application
     Router.build(this.config.controllers, this.config.routes, {
       app: this.app,
@@ -189,31 +233,23 @@ export default class Server {
       logger: this.logger,
       raven: this.config.sentry ? Raven : undefined
     })(this.app);
+
   }
 
   /**
-   * Starts listening on the configured port.
-   *
-   * @returns {Promise<ServerOptions>}
-   */
-  public listen(): Promise<ServerOptions> {
-    return new Promise((resolve, reject) => {
-      // Get http server instance
-      this._server = this.app.listen(this.config.port, () => {
-        this.onStartup().then(() => resolve(this.config)).catch((error: Error) => reject(error));
-      }).on('error', (error: Error) => reject(error))
-    });
-  }
-
-  /**
-   * Stops the server and closes the connection to the port.
+   * Handles post-startup routines, may be extended for initializing databases and services.
    *
    * @returns {Promise<void>}
    */
-  public async stop() {
-    await this.onShutdown();
-    if (this._server) {
-      return this._server.close();
+  public async onStartup() {
+    try {
+      await this.runStartupJobs();
+    } catch (error) {
+      if (this.logger) {
+        this.logger.error('Unknown startup error: ' + error.message, error);
+      }
+      process.exit(-1);
+      return;
     }
   }
 
@@ -235,24 +271,6 @@ export default class Server {
       if (this.logger) {
         this.logger.debug('Successfully ran all startup jobs');
       }
-      return;
-    }
-  }
-
-  /**
-   * Handles post-startup routines, may be extended for initializing databases and services.
-   *
-   * @returns {Promise<void>}
-   */
-  public async onStartup() {
-    try {
-      await this.runStartupJobs();
-    } catch (error) {
-      if (this.logger) {
-        this.logger.error('Unknown startup error: ' + error.message, error);
-      }
-      process.exit(-1);
-      return;
     }
   }
 
