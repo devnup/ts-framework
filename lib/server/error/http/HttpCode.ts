@@ -13,6 +13,7 @@ export enum HttpClientErrors {
   UNAUTHORIZED = 401,
   FORBIDDEN = 403,
   NOT_FOUND = 404,
+  PRECONDITION_FAILED = 412,
   UNSUPPORTED_MEDIA_TYPE = 415,
   TOO_MANY_REQUESTS = 429,
 }
@@ -22,6 +23,7 @@ export enum HttpServerErrors {
   NOT_IMPLEMENTED = 501,
   BAD_GATEWAY = 502,
   SERVICE_UNAVAILABLE = 503,
+  GATEWAY_TIMEOUT = 504,
 }
 
 export type HttpCode = HttpSuccess | HttpRedirect | HttpClientErrors | HttpServerErrors;
