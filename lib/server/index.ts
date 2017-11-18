@@ -191,11 +191,6 @@ export default class Server {
     this.app.use(legacyParams);
     this.app.use(responseBinder);
 
-    // Use base router for mapping the routes to the Express server
-    if (this.logger) {
-      this.logger.info('Initializing server middleware: Router');
-    }
-
     // Server is ready, handle post application routines
     this.register();
   }
@@ -204,6 +199,11 @@ export default class Server {
    * Registers the server routes and error handlers.
    */
   protected register() {
+
+    // Use base router for mapping the routes to the Express server
+    if (this.logger) {
+      this.logger.info('Initializing server middleware: Router');
+    }
 
     // Builds the route map and binds to current express application
     Router.build(this.config.controllers, this.config.routes, {
