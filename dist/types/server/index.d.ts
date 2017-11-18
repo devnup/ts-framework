@@ -64,15 +64,23 @@ export default class Server {
      */
     stop(): Promise<any>;
     /**
-     * Runs the server statup jobs, wil crash if any fails.
+     * Handles middleware initialization stuff.
      */
-    protected runStartupJobs(): Promise<void>;
+    onAppReady(): void;
+    /**
+     * Registers the server routes and error handlers.
+     */
+    protected register(): void;
     /**
      * Handles post-startup routines, may be extended for initializing databases and services.
      *
      * @returns {Promise<void>}
      */
     onStartup(): Promise<void>;
+    /**
+     * Runs the server statup jobs, wil crash if any fails.
+     */
+    protected runStartupJobs(): Promise<void>;
     /**
      * Handles pre-shutdown routines, may be extended for disconnecting from databases and services.
      *
