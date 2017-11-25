@@ -31,4 +31,11 @@ const AssertionHelper = function (fn: (req, res) => void) {
   } as any;
 };
 
+(AssertionHelper as any).toBoolean = (fn: (req, res) => void) => {
+  return function (req, res, next) {
+    return fn(req, res);
+  } as any;
+};
+
+
 export default AssertionHelper as IAssertionHelper;
