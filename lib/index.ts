@@ -26,4 +26,6 @@ export {
 
 export { default as Assertion } from './assertion';
 
+export { default as BaseError } from './error/BaseError';
+
 export default Server;
