@@ -3,6 +3,7 @@ import * as util from "util";
 
 export interface IAssertionHelper {
   (fn: (req, res) => void): void;
+  toBoolean(fn: Function);
 }
 
 /**
