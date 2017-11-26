@@ -2,7 +2,6 @@ ts-framework
 ============
 
 [![pipeline status](https://gitlab.devnup.com/npm/ts-framework/badges/master/pipeline.svg)](https://gitlab.devnup.com/npm/ts-framework/commits/master)
-
 [![coverage report](https://gitlab.devnup.com/npm/ts-framework/badges/master/coverage.svg)](https://gitlab.devnup.com/npm/ts-framework/commits/master)
 
 A minimalistic framework for typescript based applications, with async/await and decorators support.
@@ -13,15 +12,19 @@ A minimalistic framework for typescript based applications, with async/await and
 
 The currently API is considered to be "alpha" so it can change at any time. To 
 ensure your project won't crash, refer to the specific commit, instead of a 
-SemVer tag or git branch.
+semver tag or git branch.
 
 For example:
 
 ```bash
-npm install --save https://gitlab.devnup.com/npm/ts-framework.git#GIT_REV_HASH 
+# Install using Yarn
+yarn add git+https://gitlab.devnup.com/npm/ts-framework.git#GIT_REV_HASH 
+
+# Install using NPM
+npm install --save git+https://gitlab.devnup.com/npm/ts-framework.git#GIT_REV_HASH 
 ``` 
 
-### TL;DR - A single file application
+### TL;DR - A single file server
 
 Configure a new Server instance and start listening on desired port. 
 
@@ -81,10 +84,25 @@ External components already available as middlewares:
 - Method Override (express/method-override)
 - Cookie Parser (express/cookie-parser)
 
+Other external plugins and middlewares for the framework
+
+- **[ts-framework-versioning](https://gitlab.devnup.com/npm/ts-framework-versioning)**
+
+    Handles API versioning using HTTP Headers.
+    
+- **[ts-framework-notification](https://gitlab.devnup.com/npm/ts-framework-notification)**
+
+    Handles transactional notifications using E-mails with templates, and in the future Push notifications.
+
+- **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
+
+    Advanced usage plugin for handling Schema migrations safely within production environments.
+
+
 
 ### Server
 
-The HTTP Server definitions.
+The basic HTTP Server definitions, wraps an Express to integrate all framework modules.
 
 
 #### Utility classes
