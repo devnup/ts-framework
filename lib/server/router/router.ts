@@ -179,6 +179,8 @@ export default class ServerRouter {
       try {
         // Load controller from path
         ctrl = require(path.join(this.options.path.controllers, ctrl));
+        // Fix for moth modules systems (import / require)
+        ctrl = ctrl.default || ctrl;
       } catch (e) {
         e.stack = cleanStack(e.stack);
 

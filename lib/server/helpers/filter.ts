@@ -26,6 +26,8 @@ export default class FiltersWrapper {
         if (f && util.isString(f)) {
           // Try to load filter from file
           f = require(path.join(this.basePath, `./${f}`));
+          // Fix for moth modules systems (import / require)
+          f = f.default || f;
         }
         return f;
       } catch (e) {
