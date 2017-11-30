@@ -44,6 +44,7 @@ export interface ServerOptions {
   cors?: boolean,
   userAgent?: boolean,
   controllers?: object;
+  bodyLimit?: string;
   path?: {
     filters?: string;
     controllers?: string;
@@ -175,6 +176,9 @@ export default class Server {
     // Enable basic express middlewares
     // TODO: Pass all of this to config
     this.app.set('trust_proxy', 1);
+    if (this.config.bodyLimit) {
+      this.app.use(bodyParser({ limit: this.config.bodyLimit }));
+    }
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(methodOverride());

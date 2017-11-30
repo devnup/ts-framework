@@ -17,6 +17,7 @@ export interface ServerOptions {
     cors?: boolean;
     userAgent?: boolean;
     controllers?: object;
+    bodyLimit?: string;
     path?: {
         filters?: string;
         controllers?: string;
