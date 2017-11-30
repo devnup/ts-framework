@@ -88,7 +88,7 @@ export class ErrorReporter {
     console.error(error.stack);
 
     // Respond with error
-    res.error ? res.error(serverError) : res.json(serverError.toJSON());
+    res.error ? res.error(serverError) : res.status(serverError.status || 500).json(serverError.toJSON());
   }
 }
 
