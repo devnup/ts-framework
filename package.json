@@ -13,6 +13,7 @@
     "build": "./node_modules/.bin/tsc",
     "clean": "./node_modules/.bin/rimraf ./dist/",
     "test": "./node_modules/.bin/jest --config jest.json",
+    "docs": "./scripts/docs.sh",
     "precommit": "npm run clean -s && npm run build -s && npm test"
   },
   "dependencies": {
@@ -54,6 +55,7 @@
   "devDependencies": {
     "@types/jest": "^21.1.2",
     "@types/supertest": "^2.0.3",
+    "devnup-typedoc-theme": "git+ssh://git@gitlab.devnup.com:npm/devnup-typedoc-theme.git",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "mongodb-memory-server": "^1.6.1",
@@ -61,6 +63,7 @@
     "supertest": "^3.0.0",
     "ts-jest": "^21.1.2",
     "ts-lint": "^4.5.1",
-    "ts-node": "^3.3.0"
+    "ts-node": "^3.3.0",
+    "typedoc": "^0.9.0"
   }
 }

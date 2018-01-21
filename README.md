@@ -151,6 +151,16 @@ The MongoDB ODM definitions.
 be used in classes that extends `BaseModel`.
 
 
+## Full module reference
+
+To generate the Typedoc reference of the available modules, run the following command:
+
+```sh
+yarn run docs
+```
+
+Then check the documentation at `./docs/index.html`.
+
 
 ## License
 
