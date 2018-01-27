@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./lib",
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -10,14 +10,21 @@
     "noImplicitAny": false,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "outDir": "./build",
-    "declaration": false,
-    "allowJs": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "removeComments": false,
+    "declarationDir": "dist/types",
     "lib": [
-      "es6"
+      "es6",
+      "dom"
     ]
   },
+  "include": [
+    "./lib/**/*"
+  ],
   "exclude": [
+    "dist",
+    "build",
     "node_modules"
   ]
 }

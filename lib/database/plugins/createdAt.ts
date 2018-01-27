@@ -1,10 +1,5 @@
 export default function CreatedAtPlugin(schema, options) {
-  schema.add({
-    created_at: {
-      type: Date,
-      defaults: Date.now,
-    },
-  });
+  schema.add({ created_at: { type: Date, defaults: Date.now } });
 
   schema.pre('save', function (next) {
     const self = this;

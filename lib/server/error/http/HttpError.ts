@@ -10,7 +10,7 @@ export default class HttpError extends BaseError {
     this.status = status;
   }
 
-  public toObject() {
+  public toObject(): any {
     return {
       status: this.status,
       ...super.toObject()

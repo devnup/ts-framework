@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node --require ts-node/register start.ts"
+  },
+  "dependencies": {
+    "pjson": "^1.0.9",
+    "reflect-metadata": "^0.1.10",
+    "ts-framework": "file:../",
+    "ts-node": "^3.3.0"
+  }
+}

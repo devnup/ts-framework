@@ -21,7 +21,14 @@ export default class BaseError extends Error {
     let stackId = uuid.v4();
     super(`${message} (stackId: ${stackId})`);
     this.stackId = stackId;
+    this.name = this.constructor.name;
     this.details = details instanceof BaseErrorDetails ? details : new BaseErrorDetails(details);
+
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, this.constructor);
+    } else {
+      this.stack = (new Error(message)).stack;
+    }
   }
 
   public toObject() {

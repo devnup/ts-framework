@@ -64,7 +64,7 @@ describe("lib.Server", () => {
   });
 
   it("GET /decorated (200)", async () => {
-    @Controller()
+    @Controller('/test')
     class TestController {
 
       @Get('/status')
@@ -82,7 +82,7 @@ describe("lib.Server", () => {
     });
 
     // Perform a simple request to get a 200 response
-    await request(server.app).get('/status')
+    await request(server.app).get('/test/status')
       .expect('Content-Type', /json/)
       .expect(200, {
         status: 'ok'

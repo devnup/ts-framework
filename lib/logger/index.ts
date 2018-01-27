@@ -1,16 +1,41 @@
-import { Logger, LoggerInstance, transports } from 'winston';
+import * as winston from 'winston';
+import * as SentryTransport from 'winston-raven-sentry';
+import { ConsoleTransportInstance, LoggerInstance, LoggerOptions, transports } from 'winston';
+import { SentryTransportOptions } from "./sentry/SentryTransportOptions";
 
-export default class SimpleLogger {
-  static instance: LoggerInstance = new Logger({
-    transports: [
-      new (transports.Console)({
-        level: 'silly',
-        colorize: true,
-      })
-    ]
-  });
+export interface SimpleLoggerOptions extends LoggerOptions {
+  sentry?: SentryTransportOptions;
+}
 
-  static getInstance(): LoggerInstance {
+export default class SimpleLogger extends winston.Logger {
+  protected static instance: SimpleLogger;
+
+  static DEFAULT_TRANSPORTS: ConsoleTransportInstance[] = [
+    new (transports.Console)({
+      // TODO: Get from default configuration layer
+      level: process.env.LOG_LEVEL || 'silly',
+      colorize: true,
+    })
+  ];
+
+  public constructor(options: SimpleLoggerOptions = {}) {
+    // Prepare default console transport
+    const opt = {
+      transports: options.transports || SimpleLogger.DEFAULT_TRANSPORTS,
+    };
+
+    // Add sentry if available
+    if (options.sentry) {
+      opt.transports.push(new SentryTransport(options.sentry));
+    }
+
+    super(opt);
+  }
+
+  public static getInstance(): LoggerInstance {
+    if (!this.instance) {
+      this.instance = new SimpleLogger()
+    }
     return this.instance;
   }
 }

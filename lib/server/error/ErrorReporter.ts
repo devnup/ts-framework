@@ -66,7 +66,9 @@ export class ErrorReporter {
     if (error instanceof HttpError) {
       serverError = error as any;
     } else {
-      serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR);
+      serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
+        code: error.code ? error.code : undefined
+      });
       serverError.stack = error.stack || serverError.stack;
     }
 
@@ -74,7 +76,7 @@ export class ErrorReporter {
     if (this.options.raven) {
       this.options.raven.captureException(serverError, {
         req: req,
-        level: 'error',
+        level: serverError.status >= 500 ? 'error' : 'warning',
         tags: { stackId: serverError.stackId }
       } as any);
     }
@@ -86,7 +88,7 @@ export class ErrorReporter {
     console.error(error.stack);
 
     // Respond with error
-    res.error(serverError);
+    res.error ? res.error(serverError) : res.status(serverError.status || 500).json(serverError.toJSON());
   }
 }
 

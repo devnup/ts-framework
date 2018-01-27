@@ -32,12 +32,13 @@ export interface DatabaseOptions {
 
 export default class Database {
   logger: LoggerInstance;
-  options: DatabaseOptions;
   mongoose: mongoose.Mongoose;
 
   constructor(public options: DatabaseOptions) {
-    this.logger = options.logger || SimpleLogger.getInstance();
-    this.logger.info(`Initializing mongodb database`, { url: maskAuthUrl(options.url) });
+    if (options.logger) {
+      this.logger = options.logger;
+      this.logger.info(`Initializing mongodb database`, { url: maskAuthUrl(options.url) });
+    }
     this.mongoose = options.mongoose || new mongoose.Mongoose();
   }
 
@@ -52,7 +53,9 @@ export default class Database {
     if (typeof name === 'string') {
       return this.mongoose.model(name) as any;
     } else if (name.Schema) {
-      this.logger.silly(`Registering model in database: ${name.modelName}`);
+      if (this.logger) {
+        this.logger.silly(`Registering model in database: ${name.modelName}`);
+      }
       return this.mongoose.model(name.modelName, name.Schema) as any;
     }
 
@@ -68,16 +71,25 @@ export default class Database {
    * @returns {Promise<void>}
    */
   public async connect(): Promise<DatabaseOptions> {
-    this.logger.silly(`Connecting to mongodb database`, { url: maskAuthUrl(this.options.url) });
+    if (this.logger) {
+      this.logger.silly(`Connecting to mongodb database`, { url: maskAuthUrl(this.options.url) });
+    }
     return this.mongoose.connect(this.options.url, {
       useMongoClient: true,
       promiseLibrary: global.Promise,
     }).then(() => {
-      this.logger.silly(`Successfully connected to mongodb database`, { url: maskAuthUrl(this.options.url) });
+      if (this.logger) {
+        this.logger.silly(`Successfully connected to mongodb database`, { url: maskAuthUrl(this.options.url) });
+      }
       return this.options;
-    })
+    });
   }
 
+  /**
+   * Disconnects the database.
+   *
+   * @returns {Promise<void>}
+   */
   public async disconnect(): Promise<void> {
     return this.mongoose.disconnect();
   }
@@ -91,8 +103,14 @@ export default class Database {
     return !!this.mongoose.connection.readyState;
   }
 
+  /**
+   * Handles database errors, can be extended to include process graceful shutdown.
+   * @param error
+   */
   protected onError(error) {
-    // Let it be extended by outside classes, by default just log to the console
-    console.error(`Unhandled database error: ${error.message}`, error);
+    if (this.logger) {
+      // Let it be extended by outside classes, by default just log to the console
+      this.logger.error(`Unhandled database error: ${error.message}`, error);
+    }
   }
 };
