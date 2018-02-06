@@ -63,8 +63,10 @@ export class ErrorReporter {
     let serverError: HttpError;
 
     // Prepare error instance
-    if (error instanceof HttpError) {
-      serverError = error as any;
+    if (error && error.inner && error.inner instanceof HttpError) {
+      serverError = error.inner as HttpError;
+    } else if (error && error instanceof HttpError) {
+      serverError = error as HttpError;
     } else {
       serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
         code: error.code ? error.code : undefined
