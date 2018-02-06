@@ -64,6 +64,7 @@ export class ErrorReporter {
 
     // Prepare error instance
     if (error && error.inner && error.inner instanceof HttpError) {
+      // Fix for OAuth 2.0 errors, which encapsulate the original one into the "inner" property
       serverError = error.inner as HttpError;
     } else if (error && error instanceof HttpError) {
       serverError = error as HttpError;
