@@ -56,7 +56,6 @@ cmake-build-debug/
 .idea/**/mongoSettings.xml
 *.iws
 out/
-docs/
 .idea_modules/
 atlassian-ide-plugin.xml
 .idea/replstate.xml

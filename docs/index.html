@@ -1,0 +1,448 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ts-framework (v1.0.0-rc.1)</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">ts-framework (v1.0.0-rc.1)</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> ts-framework (v1.0.0-rc.1)</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="ts-framework">ts-framework</h1>
+				<p><a href="https://travis-ci.org/devnup/ts-framework"><img src="https://travis-ci.org/devnup/ts-framework.svg?branch=master" alt="Build Status"></a> &nbsp; <a href="https://coveralls.io/github/devnup/ts-framework?branch=master"><img src="https://coveralls.io/repos/github/devnup/ts-framework/badge.svg?branch=master" alt="Coverage Status"></a></p>
+				<p>A minimalistic framework for typescript based applications, with async/await and decorators support.</p>
+				<h2 id="getting-started">Getting Started</h2>
+				<h3 id="release-candidate-disclaimer">Release Candidate Disclaimer</h3>
+				<p>The current API is considered to be a &quot;Release Candidate&quot;. That means that small, potentially breaking
+					changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+				won&#39;t be immediately affected by such a change.</p>
+				<p>For example:</p>
+				<pre><code class="lang-bash"><span class="hljs-comment"># Install using Yarn</span>
+yarn add git+https://github.com/devnup/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH </span>
+
+<span class="hljs-comment"># Install using NPM</span>
+npm install --save git+https://github.com/devnup/ts-framework.git<span class="hljs-comment">#GIT_REV_HASH</span>
+</code></pre>
+				<h3 id="tl-dr-a-single-file-server">TL;DR - A single file server</h3>
+				<p>Configure a new Server instance and start listening on desired port. </p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> Server, { Logger, BaseRequest, BaseResponse } <span class="hljs-keyword">from</span> <span class="hljs-string">'ts-framework'</span>;
+
+<span class="hljs-comment">// Define a sample hello world route</span>
+<span class="hljs-keyword">const</span> SampleRoutes {
+  <span class="hljs-string">'/'</span>: <span class="hljs-keyword">async</span> (req: BaseRequest, res: BaseResponse) =&gt; {
+    res.success({ message: <span class="hljs-string">'Hello world!'</span> });
+  }
+}
+
+<span class="hljs-comment">// Define the server configuration</span>
+<span class="hljs-keyword">const</span> server = <span class="hljs-keyword">new</span> Server({
+  port: process.env.PORT <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span> || <span class="hljs-number">3000</span>,
+  routes: {
+    <span class="hljs-keyword">get</span>: SampleRoutes,
+  },
+});
+
+
+<span class="hljs-comment">// Startup the simple server</span>
+server.listen()
+  .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> Logger.info(<span class="hljs-string">`Server listening on port: <span class="hljs-subst">${server.config.port}</span>`</span>))
+  .catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.error(error);
+    process.exit(<span class="hljs-number">1</span>);
+  });
+</code></pre>
+				<p>You can also check a full project seed in the <a href="./examples">Examples directory</a> of this repository.</p>
+				<h3 id="usage-guide">Usage Guide</h3>
+				<p>Follow the <a href="./GUIDE.md">Usage Guide</a> for the basic boilerplate and a sample project configuration with
+				Database and user authentication samples.</p>
+				<p>Internal components:</p>
+				<ul>
+					<li>Logger (backed by <a href="https://npmjs.org/package/winston">winston</a>)</li>
+					<li>Database (backed by <a href="https://npmjs.org/package/mongoose">Mongoose</a>)</li>
+					<li>Router (backed by <a href="https://npmjs.org/package/express">Express</a>)<ul>
+							<li><strong>Controllers:</strong> Classes for handling API calls with decorators and async/await support</li>
+							<li><strong>Filters:</strong> Middlewares for body validation, permission handling and other interception routines</li>
+							<li><strong>Responses:</strong>: Simple wrappers over <code>res.status(code).json(result)</code> for success and error responses.</li>
+						</ul>
+					</li>
+				</ul>
+				<p>External components available as built-in middlewares: </p>
+				<ul>
+					<li>OAuth 2.0 (express-oauth2-server)</li>
+					<li>Sentry (RavenJS)</li>
+					<li>CORS (express/cors)</li>
+					<li>Multipart (express/multer)</li>
+					<li>User Agent (express-useragent and request-ip)</li>
+					<li>Body Parser (express/body-parser)</li>
+					<li>Method Override (express/method-override)</li>
+					<li>Cookie Parser (express/cookie-parser)</li>
+				</ul>
+				<p>Other external plugins and middlewares for this framework</p>
+				<ul>
+					<li><p><strong><a href="https://gitlab.devnup.com/npm/ts-framework-versioning">ts-framework-versioning</a></strong></p>
+						<p>  Handles API versioning using HTTP Headers.</p>
+					</li>
+					<li><p><strong><a href="https://gitlab.devnup.com/npm/ts-framework-notification">ts-framework-notification</a></strong></p>
+						<p>  Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).</p>
+					</li>
+					<li><p><strong><a href="https://gitlab.devnup.com/npm/ts-framework-migration">ts-framework-migration</a></strong></p>
+						<p>  Advanced usage plugin for handling Schema migrations safely within production environments.</p>
+					</li>
+					<li><p><strong>ts-framework-sockets (coming soon)</strong></p>
+						<p>  Socket.io layer over the TS-Framework. Currently in closed alpha.</p>
+					</li>
+					<li><p><strong>ts-framework-queue (coming soon)</strong></p>
+						<p>  Redis based task rotation queue services. Currently in closed alpha.</p>
+					</li>
+					<li><p><strong>ts-framework-cache (coming soon)</strong></p>
+						<p>  Redis based cache services for performance. Currently in closed alpha.</p>
+					</li>
+					<li><p><strong>ts-framework-sql (coming soon)</strong></p>
+						<p>  MySQL / Postgres database layer based on Sequelize. Currently in closed alpha.</p>
+					</li>
+				</ul>
+				<h2 id="documentation">Documentation</h2>
+				<h3 id="server">Server</h3>
+				<p>The basic HTTP Server definitions, wraps an Express to integrate all framework modules.</p>
+				<h4 id="utility-classes">Utility classes</h4>
+				<ul>
+					<li><strong>Logger</strong>: A simple Logger based on <a href="https://npmjs.org/package/winston">Winston</a>.</li>
+				</ul>
+				<h4 id="base-classes">Base classes</h4>
+				<ul>
+					<li><p><strong>BaseError</strong>: The base error instance for all framework exceptions.</p>
+						<ul>
+							<li><code>error.stackId</code>: An unique uuid/v4 for Errors to be sent to external service, such as ELK or Sentry.</li>
+							<li><code>error.details</code>: An object with misc details associated with the error instance. </li>
+						</ul>
+					</li>
+					<li><p><strong>BaseRequest</strong>: Extends Express.js request class for framework binding.</p>
+						<ul>
+							<li><code>request.logger</code>: The Server logger instance, if supplied in the Server constructor.</li>
+						</ul>
+					</li>
+					<li><p><strong>BaseResponse</strong>: Extends Express.js response class for framework binding.</p>
+						<ul>
+							<li><code>response.success(data: any)</code>: A shortcut for setting status as <code>200</code> and calling <code>data.toJSON()</code> if available.</li>
+							<li><code>response.error(error: String | Error)</code>: Handles errors before sending to response, cleaning the stack and assigned an unique <code>stackId</code>.</li>
+						</ul>
+					</li>
+				</ul>
+				<h4 id="decorators">Decorators</h4>
+				<ul>
+					<li><p><strong>@Controller(baseRoute: string, middlewares?: Function[])</strong>: Decorator for controller classes.</p>
+					</li>
+					<li><p><strong>@Get(route: string, middlewares?: Function[])</strong>: Decorator for GET methods, must be static.</p>
+					</li>
+					<li><p><strong>@Post(route: string, middlewares?: Function[])</strong>: Decorator for POST methods, must be static.</p>
+					</li>
+					<li><p><strong>@Put(route: string, middlewares?: Function[])</strong>: Decorator for PUT methods, must be static.</p>
+					</li>
+					<li><p><strong>@Delete(route: string, middlewares?: Function[])</strong>: Decorator for DELETE methods, must be static.</p>
+					</li>
+				</ul>
+				<h3 id="database">Database</h3>
+				<p>The MongoDB ODM definitions.</p>
+				<h4 id="base-classes">Base classes</h4>
+				<ul>
+					<li><strong>BaseModel</strong>: The base class for all model instances decorated with <code>@Model</code>. <ul>
+							<li><code>BaseModel.modelName</code>: The name of the model collection in MongoDB, as supplied in the <code>@Model</code> decorator.</li>
+						</ul>
+					</li>
+				</ul>
+				<h4 id="decorators">Decorators</h4>
+				<ul>
+					<li><strong>@Model(name: string)</strong>: Assigns a name for the decorated model class to be used as collection name in MongoDB. Must
+					be used in classes that extends <code>BaseModel</code>.</li>
+				</ul>
+				<h2 id="full-module-reference">Full module reference</h2>
+				<p>To generate the Typedoc reference of the available modules, run the following command:</p>
+				<pre><code class="lang-sh">yarn run docs
+</code></pre>
+				<p>Then check the documentation at <code>./docs/index.html</code>.</p>
+				<h2 id="license">License</h2>
+				<p>The project is licensed under the <a href="./LICENSE.md">MIT License</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-is-external">
+						<a href="enums/httpclienterrors.html" class="tsd-kind-icon">Http<wbr>Client<wbr>Errors</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-is-external">
+						<a href="enums/httpredirect.html" class="tsd-kind-icon">Http<wbr>Redirect</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-is-external">
+						<a href="enums/httpservererrors.html" class="tsd-kind-icon">Http<wbr>Server<wbr>Errors</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-is-external">
+						<a href="enums/httpsuccess.html" class="tsd-kind-icon">Http<wbr>Success</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/basedao.html" class="tsd-kind-icon">BaseDAO</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/baseerror.html" class="tsd-kind-icon">Base<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/baseerrordetails.html" class="tsd-kind-icon">Base<wbr>Error<wbr>Details</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/basejob.html" class="tsd-kind-icon">Base<wbr>Job</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/basemodel.html" class="tsd-kind-icon">Base<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/database.html" class="tsd-kind-icon">Database</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/databaseerror.html" class="tsd-kind-icon">Database<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/errorreporter.html" class="tsd-kind-icon">Error<wbr>Reporter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/filterswrapper.html" class="tsd-kind-icon">Filters<wbr>Wrapper</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/httperror.html" class="tsd-kind-icon">Http<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/server.html" class="tsd-kind-icon">Server</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/serverrouter.html" class="tsd-kind-icon">Server<wbr>Router</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-external">
+						<a href="classes/simplelogger.html" class="tsd-kind-icon">Simple<wbr>Logger</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/basecontroller.html" class="tsd-kind-icon">Base<wbr>Controller</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/basemodelconstructor.html" class="tsd-kind-icon">Base<wbr>Model<wbr>Constructor</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/baserequest.html" class="tsd-kind-icon">Base<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/baseresponse.html" class="tsd-kind-icon">Base<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/databaseoptions.html" class="tsd-kind-icon">Database<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/errordefinitions.html" class="tsd-kind-icon">Error<wbr>Definitions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/errorreporteroptions.html" class="tsd-kind-icon">Error<wbr>Reporter<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/iassertionhelper.html" class="tsd-kind-icon">IAssertion<wbr>Helper</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/sentrytransportoptions.html" class="tsd-kind-icon">Sentry<wbr>Transport<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/serveroptions.html" class="tsd-kind-icon">Server<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/serverrouteroptions.html" class="tsd-kind-icon">Server<wbr>Router<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/simpleloggeroptions.html" class="tsd-kind-icon">Simple<wbr>Logger<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external">
+						<a href="globals.html#httpcode" class="tsd-kind-icon">Http<wbr>Code</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#base_ctrls_path" class="tsd-kind-icon">BASE_<wbr>CTRLS_<wbr>PATH</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#base_filters_path" class="tsd-kind-icon">BASE_<wbr>FILTERS_<wbr>PATH</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external">
+						<a href="globals.html#delete" class="tsd-kind-icon">Delete</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external">
+						<a href="globals.html#get" class="tsd-kind-icon">Get</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#logger" class="tsd-kind-icon">Logger</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external">
+						<a href="globals.html#post" class="tsd-kind-icon">Post</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external">
+						<a href="globals.html#put" class="tsd-kind-icon">Put</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#sentry_release" class="tsd-kind-icon">SENTRY_<wbr>RELEASE</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#schema" class="tsd-kind-icon">Schema</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#ctrl_path" class="tsd-kind-icon">ctrl_<wbr>path</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#filter_path" class="tsd-kind-icon">filter_<wbr>path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#assertionhelper" class="tsd-kind-icon">Assertion<wbr>Helper</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#controller" class="tsd-kind-icon">Controller</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#model" class="tsd-kind-icon">Model</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#asyncmiddleware" class="tsd-kind-icon">async<wbr>Middleware</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#legacyparams" class="tsd-kind-icon">legacy<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external">
+						<a href="globals.html#maskauthurl" class="tsd-kind-icon">mask<wbr>Auth<wbr>Url</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
+						<a href="globals.html#routedecoratorfactory" class="tsd-kind-icon">route<wbr>Decorator<wbr>Factory</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
