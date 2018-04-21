@@ -1,6 +1,6 @@
-import Server, { Logger } from "ts-framework";
-import StatusController from "./controllers/StatusController";
-import MainDatabase from "./MainDatabase";
+import Server, { Logger } from 'ts-framework';
+import MainDatabase from './MainDatabase';
+import Controllers from './controllers';
 
 export default class MainServer extends Server {
   database: MainDatabase;
@@ -10,9 +10,7 @@ export default class MainServer extends Server {
       logger: Logger,
       secret: 'PLEASE_CHANGE_ME',
       port: process.env.PORT as any || 3000,
-      controllers: {
-        status: StatusController
-      },
+      controllers: Controllers,
       // sentry: {
       //   dsn: ''
       // }
@@ -30,6 +28,6 @@ export default class MainServer extends Server {
    */
   async onStartup(): Promise<void> {
     await this.database.connect();
-    this.logger.info(`Server listening in port: ${this.config.port}`)
+    this.logger.info(`Server listening in port: ${this.config.port}`);
   }
 }

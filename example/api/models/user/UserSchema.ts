@@ -1,13 +1,11 @@
-import { Schema } from "../../../../lib/database";
-import { CreatedAt, UpdatedAt } from "../../../../lib/database/plugins";
+import { Schema } from 'ts-framework';
 
 const UserSchema = new Schema({
   name: String,
   email: String,
   password: String,
+},                            { 
+  timestamps: { createdAt: true, updatedAt: true },
 });
-
-UserSchema.plugin(CreatedAt);
-UserSchema.plugin(UpdatedAt);
 
 export default UserSchema;

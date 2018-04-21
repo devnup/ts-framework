@@ -1,9 +1,8 @@
-import { BaseModel } from "../../../../lib/database";
-import { Model } from "../../../../lib/database";
-import UserSchema from "./UserSchema";
-import MainDatabase from "../../MainDatabase";
+import { Model, BaseModel } from 'ts-framework';
+import MainDatabase from '../../MainDatabase';
+import UserSchema from './UserSchema';
 
-@Model("Users")
+@Model('Users')
 class UserModel extends BaseModel {
   static Schema = UserSchema;
 }

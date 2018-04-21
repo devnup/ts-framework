@@ -1,5 +1,5 @@
+import { Controller, Post } from 'ts-framework';
 import User from '../models/user/User';
-import { Controller, Post } from "ts-framework";
 
 @Controller('/users')
 export default class UserController {
@@ -18,9 +18,9 @@ export default class UserController {
   @Post('/:id')
   static async findAndUpdate(req, res) {
     const user = await User.findOneAndUpdate({
-      email: req.body.email
-    }, {
-      $set: { name: req.body.name }
+      email: req.body.email,
+    },                                       {
+      $set: { name: req.body.name },
     });
 
     return res.success(user);

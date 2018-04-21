@@ -50,5 +50,5 @@ export default class Database {
      * Handles database errors, can be extended to include process graceful shutdown.
      * @param error
      */
-    protected onError(error: any): void;
+    onError(error: any): void;
 }

@@ -106,7 +106,7 @@ export default class Database {
    * Handles database errors, can be extended to include process graceful shutdown.
    * @param error
    */
-  protected onError(error) {
+  public onError(error) {
     if (this.logger) {
       // Let it be extended by outside classes, by default just log to the console
       this.logger.error(`Unhandled database error: ${error.message}`, error);

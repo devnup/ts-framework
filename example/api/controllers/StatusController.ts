@@ -1,5 +1,5 @@
 import * as Package from 'pjson';
-import { Controller, Get } from "ts-framework";
+import { Controller, Get } from 'ts-framework';
 
 @Controller()
 export default class StatusController {
@@ -11,7 +11,7 @@ export default class StatusController {
       name: Package.name,
       version: Package.version,
       environment: process.env.NODE_ENV || 'development',
-      uptime: Date.now() - StatusController.STARTED_AT
+      uptime: Date.now() - StatusController.STARTED_AT,
     });
   }
 }

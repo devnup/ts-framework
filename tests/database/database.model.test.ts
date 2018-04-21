@@ -1,6 +1,5 @@
 import MongodbMemoryServer from 'mongodb-memory-server';
-import { Model } from '../../lib/database/decorators';
-import Database, { Schema, BaseModel } from '../../lib/database';
+import { Model, Logger, Schema, BaseModel, Database } from '../../lib';
 
 // May require additional time for downloading MongoDB binaries
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
@@ -13,7 +12,7 @@ describe('lib.Database', () => {
   beforeAll(async () => {
     mongoServer = (new MongodbMemoryServer());
     mongoUri = await mongoServer.getConnectionString();
-    db = new Database({ url: mongoUri });
+    db = new Database({ url: mongoUri, logger: Logger });
     await db.connect();
     expect(db.isReady()).toBe(true);
   });
@@ -45,5 +44,14 @@ describe('lib.Database', () => {
     expect(obj.status).toBe('ok');
     expect(obj.toJSON()).toHaveProperty('status', 'ok');
     expect(obj.toObject()).toHaveProperty('status', 'ok');
+  });
+
+  it('should not instantiate a model without schema', async () => {
+    
+    @Model(TestModel.COLLECTION)
+    class TestModel extends BaseModel {
+      static COLLECTION = 'Test';
+    }
+    expect (() => db.model(TestModel)).toThrow(/Schema is not defined/i);
   });
 });

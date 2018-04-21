@@ -1,5 +1,5 @@
-import * as Package from "pjson";
-import { Database, DatabaseOptions } from "ts-framework";
+import * as Package from 'pjson';
+import { Database, DatabaseOptions, BaseModel } from 'ts-framework';
 
 export default class MainDatabase extends Database {
   static instance: MainDatabase;
@@ -12,8 +12,8 @@ export default class MainDatabase extends Database {
   public static getInstance(options?: DatabaseOptions) {
     if (!MainDatabase.instance) {
       MainDatabase.instance = new MainDatabase({
+        ...options,
         url: process.env.MONGO_URL || `mongodb://localhost:27017/${Package.name}`,
-        ...options
       });
     }
     return MainDatabase.instance;
@@ -26,7 +26,7 @@ export default class MainDatabase extends Database {
    *
    * @returns {BaseModel}
    */
-  public static model(name: any) {
+  public static model(name: any): BaseModel {
     return MainDatabase.getInstance().model(name);
   }
 }
