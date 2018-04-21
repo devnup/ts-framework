@@ -28,13 +28,13 @@ describe('lib.server.middlewares.Async', () => {
       },
     });
 
-    // Perform a simple request to get a 200 response
+    // Perform a simple request to get a 500 response
     await request(server.app).get('/')
       .expect('Content-Type', /json/)
       .expect(500, /Async middleware cannot wrap something that is not a function/);
   });
 
-  it('should not wrap a valid function', async () => {
+  it('should wrap a valid function', async () => {
 
     // Initialize a simple server
     const server = new Server({
