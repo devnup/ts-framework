@@ -95,7 +95,7 @@ Other external plugins and middlewares for the framework
     
 - **[ts-framework-notification](https://gitlab.devnup.com/npm/ts-framework-notification)**
 
-    Handles transactional notifications using E-mails with templates, and in the future Push notifications.
+    Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).
 
 - **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
 
