@@ -1,27 +1,25 @@
 ts-framework
 ============
 
-[![pipeline status](https://gitlab.devnup.com/npm/ts-framework/badges/master/pipeline.svg)](https://gitlab.devnup.com/npm/ts-framework/commits/master)
-[![coverage report](https://gitlab.devnup.com/npm/ts-framework/badges/master/coverage.svg)](https://gitlab.devnup.com/npm/ts-framework/commits/master)
-
 A minimalistic framework for typescript based applications, with async/await and decorators support.
+
 
 ## Getting Started
 
-### Installing the Alpha Preview
+### Release Candidate Disclaimer
 
-The currently API is considered to be "alpha" so it can change at any time. To 
-ensure your project won't crash, refer to the specific commit, instead of a 
-semver tag or git branch.
+The currently API is considered to be a "Release Candidate". That means that small, potentially breaking 
+changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+won't be immediately affected by such a change.
 
 For example:
 
 ```bash
 # Install using Yarn
-yarn add git+https://gitlab.devnup.com/npm/ts-framework.git#GIT_REV_HASH 
+yarn add git+https://github.com/devnup/ts-framework.git#GIT_REV_HASH 
 
 # Install using NPM
-npm install --save git+https://gitlab.devnup.com/npm/ts-framework.git#GIT_REV_HASH 
+npm install --save git+https://github.com/devnup/ts-framework.git#GIT_REV_HASH 
 ``` 
 
 ### TL;DR - A single file server
@@ -97,6 +95,18 @@ Other external plugins and middlewares for the framework
 - **[ts-framework-migration](https://gitlab.devnup.com/npm/ts-framework-migration)**
 
     Advanced usage plugin for handling Schema migrations safely within production environments.
+
+- **ts-framework-sockets (coming soon)**
+
+    Socket.io layer over the TS-Framework. Currently in closed alpha.
+
+- **ts-framework-queue (coming soon)**
+
+    Redis based task rotation queue services. Currently in closed alpha.
+
+- **ts-framework-cache (coming soon)**
+
+    Redis based cache services for performance. Currently in closed alpha.
 
 
 
