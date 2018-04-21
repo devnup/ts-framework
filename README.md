@@ -8,7 +8,7 @@ A minimalistic framework for typescript based applications, with async/await and
 
 ### Release Candidate Disclaimer
 
-The currently API is considered to be a "Release Candidate". That means that small, potentially breaking 
+The current API is considered to be a "Release Candidate". That means that small, potentially breaking 
 changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 won't be immediately affected by such a change.
 
@@ -29,15 +29,18 @@ Configure a new Server instance and start listening on desired port.
 ```typescript
 import Server, { Logger, BaseRequest, BaseResponse } from 'ts-framework';
 
+// Define a sample hello world route
+const SampleRoutes {
+  '/': async (req: BaseRequest, res: BaseResponse) => {
+    res.success({ message: 'Hello world!' });
+  }
+}
+
 // Define the server configuration
 const server = new Server({
   port: process.env.PORT as any || 3000,
   routes: {
-    get: {
-      '/': async (req: BaseRequest, res: BaseResponse) => {
-        res.success({ message: 'Hello world!' })
-      }
-    }
+    get: SampleRoutes,
   },
 });
 
@@ -50,6 +53,8 @@ server.listen()
     process.exit(1);
   });
 ```
+
+You can also check a full project seed in the [Examples directory](./examples) of this repository.
 
 ### Usage Guide
 
@@ -107,6 +112,10 @@ Other external plugins and middlewares for the framework
 - **ts-framework-cache (coming soon)**
 
     Redis based cache services for performance. Currently in closed alpha.
+
+- **ts-framework-sql (coming soon)**
+
+    MySQL / Postgres database layer based on Sequelize. Currently in closed alpha.
 
 
 
