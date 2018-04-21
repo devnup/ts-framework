@@ -1,9 +1,15 @@
-language: node_js
 sudo: false
+language: node_js
+branches:
+  only:
+    - master
+cache:
+  yarn: true
+  directories:
+    - node_modules
 node_js:
-  - "8"
-install:
-  - yarn install
+  - 8
 script:
-  - yarn run -s test
-  - yarn run -s coveralls
+  - npm run test
+after_success:
+  - npm run coveralls
