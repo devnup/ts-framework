@@ -1,14 +1,30 @@
 {
   "compilerOptions": {
+    "baseUrl": "./lib",
     "target": "es6",
     "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": false,
+    "noImplicitAny": false,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "removeComments": false,
+    "declarationDir": "dist/types",
     "lib": [
       "es6",
       "dom"
     ]
   },
+  "include": [
+    "./api/**/*"
+  ],
   "exclude": [
+    "dist",
+    "build",
     "node_modules"
   ]
 }

@@ -56,7 +56,7 @@ server.listen()
   });
 ```
 
-You can also check a full project seed in the [Examples directory](./examples) of this repository.
+You can also check a full project seed in the [Examples directory](./example) of this repository.
 
 ### Usage Guide
 
