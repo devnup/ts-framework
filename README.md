@@ -116,57 +116,7 @@ Other external plugins and middlewares for this framework
 
 ## Documentation
 
-
-### Server
-
-The basic HTTP Server definitions, wraps an Express to integrate all framework modules.
-
-
-#### Utility classes
-
-- **Logger**: A simple Logger based on [Winston](https://npmjs.org/package/winston).
-
-#### Base classes
-
-- **BaseError**: The base error instance for all framework exceptions.
-    - `error.stackId`: An unique uuid/v4 for Errors to be sent to external service, such as ELK or Sentry.
-    - `error.details`: An object with misc details associated with the error instance. 
-
-- **BaseRequest**: Extends Express.js request class for framework binding.
-    - `request.logger`: The Server logger instance, if supplied in the Server constructor.
-
-- **BaseResponse**: Extends Express.js response class for framework binding.
-    - `response.success(data: any)`: A shortcut for setting status as `200` and calling `data.toJSON()` if available.
-    - `response.error(error: String | Error)`: Handles errors before sending to response, cleaning the stack and assigned an unique `stackId`.
-
-#### Decorators
-
-- **@Controller(baseRoute: string, middlewares?: Function[])**: Decorator for controller classes.
-
-- **@Get(route: string, middlewares?: Function[])**: Decorator for GET methods, must be static.
-
-- **@Post(route: string, middlewares?: Function[])**: Decorator for POST methods, must be static.
-
-- **@Put(route: string, middlewares?: Function[])**: Decorator for PUT methods, must be static.
-
-- **@Delete(route: string, middlewares?: Function[])**: Decorator for DELETE methods, must be static.
-
-
-### Database
-
-The MongoDB ODM definitions.
-
-#### Base classes
-
-- **BaseModel**: The base class for all model instances decorated with `@Model`. 
-    - `BaseModel.modelName`: The name of the model collection in MongoDB, as supplied in the `@Model` decorator.
-
-
-#### Decorators
-
-- **@Model(name: string)**: Assigns a name for the decorated model class to be used as collection name in MongoDB. Must
-be used in classes that extends `BaseModel`.
-
+Checkout the rendered TS Docs in the official page: [https://devnup.github.io/ts-framework/](https://devnup.github.io/ts-framework/)
 
 ## Full module reference
 
