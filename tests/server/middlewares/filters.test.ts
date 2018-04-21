@@ -1,9 +1,9 @@
-import * as path from "path";
-import * as request from "supertest";
-import Server from "../../../lib/server";
+import * as path from 'path';
+import * as request from 'supertest';
+import Server from '../../../lib/server';
 
-describe("lib.server.helpers.FilterWrapper", () => {
-  it("GET /pass_simple_filter (200)", async () => {
+describe('lib.server.helpers.FilterWrapper', () => {
+  it('GET /pass_simple_filter (200)', async () => {
     const server = new Server({
       port: 3333,
       secret: 'TEST_SECRET',
@@ -11,44 +11,44 @@ describe("lib.server.helpers.FilterWrapper", () => {
         get: {
           '/': {
             controller: (req, res) => res.json({ test: 'ok' }),
-            filters: [require('../../__mock__/okFilter.mock')]
-          }
-        }
+            filters: [require('../../__mock__/okFilter.mock')],
+          },
+        },
       },
     });
 
     // Perform a simple request to get a 200 response
-    await request(server.app).get("/")
+    await request(server.app).get('/')
       .expect('Content-Type', /json/)
-      .expect(200, { test: 'ok' })
+      .expect(200, { test: 'ok' });
   });
 
-  it("GET /pass_simple_file_filter (200)", async () => {
+  it('GET /pass_simple_file_filter (200)', async () => {
     const server = new Server({
       port: 3333,
       secret: 'TEST_SECRET',
       path: {
-        filters: path.join(__dirname, '../../__mock__')
+        filters: path.join(__dirname, '../../__mock__'),
       },
       routes: {
         get: {
           '/': {
             controller: (req, res) => res.json({ test: 'ok' }),
             filters: [
-              'okFilter.mock'
-            ]
-          }
-        }
+              'okFilter.mock',
+            ],
+          },
+        },
       },
     });
 
     // Perform a simple request to get a 200 response
-    await request(server.app).get("/")
+    await request(server.app).get('/')
       .expect('Content-Type', /json/)
-      .expect(200, { test: 'ok' })
+      .expect(200, { test: 'ok' });
   });
 
-  it("GET /error_filter (200)", async () => {
+  it('GET /error_filter (200)', async () => {
     const server = new Server({
       port: 3333,
       secret: 'TEST_SECRET',
@@ -56,54 +56,54 @@ describe("lib.server.helpers.FilterWrapper", () => {
         get: {
           '/': {
             controller: (req, res) => res.json({ test: 'ok' }),
-            filters: [require('../../__mock__/forbiddenFilter.mock')]
-          }
-        }
+            filters: [require('../../__mock__/forbiddenFilter.mock')],
+          },
+        },
       },
     });
 
     // Perform a simple request to get the error response
-    await request(server.app).get("/")
+    await request(server.app).get('/')
       .expect('Content-Type', /json/)
-      .expect(403, { test: 'forbidden' })
+      .expect(403, { test: 'forbidden' });
   });
 
-  it("should break if filter was not found", async () => {
+  it('should break if filter was not found', async () => {
     expect(() => new Server({
       port: 3333,
       secret: 'TEST_SECRET',
       path: {
-        filters: path.join(__dirname, '../../__mock__')
+        filters: path.join(__dirname, '../../__mock__'),
       },
       routes: {
         get: {
           '/': {
             controller: (req, res) => res.json({ test: 'ok' }),
             filters: [
-              'someUnknownFilter'
-            ]
-          }
-        }
+              'someUnknownFilter',
+            ],
+          },
+        },
       },
     })).toThrow(/someUnknownFilter/);
   });
 
-  it("should also break if the filter breaks in initialization", async () => {
+  it('should also break if the filter breaks in initialization', async () => {
     expect(() => new Server({
       port: 3333,
       secret: 'TEST_SECRET',
       path: {
-        filters: path.join(__dirname, '../../__mock__')
+        filters: path.join(__dirname, '../../__mock__'),
       },
       routes: {
         get: {
           '/': {
             controller: (req, res) => res.json({ test: 'ok' }),
             filters: [
-              'brokenFilter.mock'
-            ]
-          }
-        }
+              'brokenFilter.mock',
+            ],
+          },
+        },
       },
     })).toThrow(/broken filter/);
   });

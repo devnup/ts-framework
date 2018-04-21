@@ -1,11 +1,10 @@
-import Plugins from './plugins';
 import * as mongoose from 'mongoose';
-import { BaseModel } from "./model";
+import { BaseModel } from './model';
 import { Model } from './decorators';
-import BaseError from "../error/BaseError";
-import { LoggerInstance } from "winston";
+import BaseError from '../error/BaseError';
+import { LoggerInstance } from 'winston';
 import SimpleLogger from '../logger';
-import { maskAuthUrl } from "./util";
+import { maskAuthUrl } from './util';
 
 (mongoose as any).Promise = global.Promise;
 
@@ -14,9 +13,8 @@ const Schema = mongoose.Schema;
 export {
   Model,
   Schema,
-  Plugins,
-  BaseModel
-}
+  BaseModel,
+};
 
 export { BaseModel as BaseDAO };
 
@@ -52,7 +50,8 @@ export default class Database {
   public model<T extends BaseModel>(name: string | T | any): BaseModel {
     if (typeof name === 'string') {
       return this.mongoose.model(name) as any;
-    } else if (name.Schema) {
+    } 
+    if (name.Schema) {
       if (this.logger) {
         this.logger.silly(`Registering model in database: ${name.modelName}`);
       }
@@ -113,4 +112,4 @@ export default class Database {
       this.logger.error(`Unhandled database error: ${error.message}`, error);
     }
   }
-};
+}

@@ -1,4 +1,4 @@
-import response from "../helpers/response";
+import response from '../helpers/response';
 
 export default (req: any, res: any, next: Function) => {
   res.error = response.error(res);

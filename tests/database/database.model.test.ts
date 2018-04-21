@@ -1,12 +1,14 @@
 import MongodbMemoryServer from 'mongodb-memory-server';
-import { Model } from "../../lib/database/decorators";
-import Database, { Schema, BaseModel } from "../../lib/database";
+import { Model } from '../../lib/database/decorators';
+import Database, { Schema, BaseModel } from '../../lib/database';
 
 // May require additional time for downloading MongoDB binaries
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
 
 describe('lib.Database', () => {
-  let mongoUri, mongoServer, db;
+  let db;
+  let mongoUri;
+  let mongoServer;
 
   beforeAll(async () => {
     mongoServer = (new MongodbMemoryServer());
@@ -21,10 +23,10 @@ describe('lib.Database', () => {
     await mongoServer.stop();
   });
 
-  it("should instantiate a simple model", async () => {
+  it('should instantiate a simple model', async () => {
 
     @Model(TestModel.COLLECTION, new Schema({
-      status: { type: String, 'default': 'ok' }
+      status: { type: String, default: 'ok' },
     }))
     class TestModel extends BaseModel {
       static COLLECTION = 'Test';

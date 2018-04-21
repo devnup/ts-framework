@@ -1,9 +1,9 @@
-import BaseError, { BaseErrorDetails } from "../../lib/error/BaseError";
+import BaseError, { BaseErrorDetails } from '../../lib/error/BaseError';
 
 describe('BaseError', () => {
   it('should instantiate a simple error details', () => {
     expect(new BaseErrorDetails()).toBeDefined();
-    const details = new BaseErrorDetails({test: 'ok'});
+    const details = new BaseErrorDetails({ test: 'ok' });
     expect(details).toHaveProperty('test', 'ok');
   });
 
@@ -27,7 +27,7 @@ describe('BaseError', () => {
   });
 
   it('should instantiate a simple error based on details object', () => {
-    const error = new BaseError('Test error', {test: 'ok'});
+    const error = new BaseError('Test error', { test: 'ok' });
 
     // Basic error attributes
     expect(error).toHaveProperty('message');
@@ -48,7 +48,7 @@ describe('BaseError', () => {
   });
 
   it('should instantiate a simple error based on details class object', () => {
-    const error = new BaseError('Test error', new BaseErrorDetails({test: 'ok'}));
+    const error = new BaseError('Test error', new BaseErrorDetails({ test: 'ok' }));
 
     // Basic error attributes
     expect(error).toHaveProperty('message');

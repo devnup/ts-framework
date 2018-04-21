@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { LoggerInstance } from "winston";
+import { LoggerInstance } from 'winston';
 
 export interface BaseRequest extends Request {
   file?: any;

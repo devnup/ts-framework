@@ -1,5 +1,5 @@
 // TODO
-import * as util from "util";
+import * as util from 'util';
 
 export interface IAssertionHelper {
   (fn: (req, res) => void): void;
@@ -17,13 +17,12 @@ const AssertionHelper = function (fn: (req, res) => void) {
     try {
       const cb = (fn(req, res) as any);
       if (cb && util.isFunction(cb.catch)) {
-        return cb.then(next).catch(error => {
+        return cb.then(next).catch((error: Error | any) => {
           error.status = error.status || 400;
           next(error);
         });
-      } else {
-        next();
       }
+      next();
       return cb;
     } catch (error) {
       console.error(error);

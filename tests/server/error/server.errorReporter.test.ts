@@ -1,9 +1,9 @@
-import * as request from "supertest";
+import * as request from 'supertest';
 import Server from '../../../lib/server';
-import HttpError from "../../../lib/server/error/http/HttpError";
+import HttpError from '../../../lib/server/error/http/HttpError';
 
-describe("lib.server.errors.errorReporter", () => {
-  it("GET /unknown_error (500)", async () => {
+describe('lib.server.errors.errorReporter', () => {
+  it('GET /unknown_error (500)', async () => {
 
     // Initialize a simple server
     const server = new Server({
@@ -13,8 +13,8 @@ describe("lib.server.errors.errorReporter", () => {
         get: {
           '/': (req, res) => {
             throw new Error('TEST_ERROR');
-          }
-        }
+          },
+        },
       },
     });
 
@@ -22,14 +22,14 @@ describe("lib.server.errors.errorReporter", () => {
     await request(server.app).get('/')
       .expect('Content-Type', /json/)
       .expect(500)
-      .then(response => {
+      .then((response: any) => {
         expect(response.body.status).toBe(500);
         expect(response.body.stackId).toBeDefined();
         expect(response.body.message).toMatch(/TEST_ERROR/);
       });
   });
 
-  it("GET /http_error (400)", async () => {
+  it('GET /http_error (400)', async () => {
 
     // Initialize a simple server
     const server = new Server({
@@ -39,8 +39,8 @@ describe("lib.server.errors.errorReporter", () => {
         get: {
           '/': (req, res) => {
             throw new HttpError('BAD_PARAMS', 400);
-          }
-        }
+          },
+        },
       },
     });
 
@@ -48,7 +48,7 @@ describe("lib.server.errors.errorReporter", () => {
     await request(server.app).get('/')
       .expect('Content-Type', /json/)
       .expect(400)
-      .then(response => {
+      .then((response: any) => {
         expect(response.body.status).toBe(400);
         expect(response.body.stackId).toBeDefined();
         expect(response.body.message).toMatch(/BAD_PARAMS/);

@@ -1,4 +1,4 @@
-import { BaseController } from "./controller";
+import { BaseController } from './controller';
 /**
  * The @Controller decorator.
  *

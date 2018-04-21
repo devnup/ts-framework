@@ -1,4 +1,4 @@
-import { BaseController } from "./controller";
+import { BaseController } from './controller';
 
 /* Simple factory for generating the routes decorators */
 const routeDecoratorFactory = (method): Function => {
@@ -7,12 +7,12 @@ const routeDecoratorFactory = (method): Function => {
       target.routes = target.routes || {};
       target.routes[method] = target.routes[method] || {};
       target.routes[method][route] = {
+        filters,
         controller: target[key],
-        filters: filters,
       };
       return descriptor;
-    }
-  }
+    };
+  };
 };
 
 /**
@@ -30,8 +30,8 @@ export const Controller = (route?: string, filters: Function[] = []) => {
       static routes() {
         return constructor.routes || {};
       }
-    }
-  }
+    };
+  };
 };
 
 /**

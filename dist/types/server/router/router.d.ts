@@ -1,10 +1,10 @@
 /// <reference types="winston" />
 /// <reference types="express" />
-import { Application } from 'express';
-import { LoggerInstance } from "winston";
+import * as express from 'express';
+import { LoggerInstance } from 'winston';
 export interface ServerRouterOptions {
     logger?: LoggerInstance;
-    app?: Application;
+    app?: express.Application;
     path: {
         controllers?: string;
         filters?: string;
@@ -34,7 +34,7 @@ export default class ServerRouter {
         get: {};
         post: {};
         put: {};
-        'delete': {};
+        delete: {};
     };
     init(): void;
     /**
@@ -62,7 +62,7 @@ export default class ServerRouter {
      *
      * @returns {express.Application}
      */
-    register(app?: Application): any;
+    register(app?: express.Application): any;
     /**
      * Build a router using the supplied routes map and options.
      *

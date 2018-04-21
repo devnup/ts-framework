@@ -1,8 +1,8 @@
 import * as express from 'express';
-import * as request from "supertest";
-import response from "../../../lib/server/helpers/response";
-import BaseError from "../../../lib/error/BaseError";
-import HttpError from "../../../lib/server/error/http/HttpError";
+import * as request from 'supertest';
+import response from '../../../lib/server/helpers/response';
+import BaseError from '../../../lib/error/BaseError';
+import HttpError from '../../../lib/server/error/http/HttpError';
 
 describe('lib.server.helpers.response', () => {
 
@@ -14,10 +14,10 @@ describe('lib.server.helpers.response', () => {
       res.error = response.error(res);
       res.success = response.success(res);
       next();
-    })
+    });
   });
 
-  it("should send successful responses", async () => {
+  it('should send successful responses', async () => {
     expect.assertions(1);
 
     app.get('/empty', (req, res) => res.success());
@@ -41,12 +41,10 @@ describe('lib.server.helpers.response', () => {
     await request(app).get('/tests')
       .expect('Content-Type', /json/)
       .expect(200)
-      .then(response => {
-        expect(response.body).toHaveProperty('length', 2);
-      });
+      .then(response => expect(response.body).toHaveProperty('length', 2));
   });
 
-  it("should send error responses", async () => {
+  it('should send error responses', async () => {
     expect.assertions(6);
 
     app.get('/string', (req, res) => res.error('Test error'));
@@ -57,7 +55,7 @@ describe('lib.server.helpers.response', () => {
     await request(app).get('/string')
       .expect('Content-Type', /json/)
       .expect(500)
-      .then(response => {
+      .then((response: any) => {
         expect(response.body).toHaveProperty('message');
         expect(response.body.message).toMatch(/Test error/);
       });
@@ -66,7 +64,7 @@ describe('lib.server.helpers.response', () => {
     await request(app).get('/baseError')
       .expect('Content-Type', /json/)
       .expect(500)
-      .then(response => {
+      .then((response: any) => {
         expect(response.body).toHaveProperty('message');
         expect(response.body.message).toMatch(/Base test error/);
       });
@@ -75,9 +73,9 @@ describe('lib.server.helpers.response', () => {
     await request(app).get('/httpError')
       .expect('Content-Type', /json/)
       .expect(400)
-      .then(response => {
+      .then((response: any) => {
         expect(response.body).toHaveProperty('message');
         expect(response.body.message).toMatch(/Http test error/);
       });
-  })
+  });
 });

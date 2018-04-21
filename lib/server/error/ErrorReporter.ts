@@ -1,9 +1,9 @@
 import * as Raven from 'raven';
-import { BaseRequest, BaseResponse } from "../helpers/response";
+import { BaseRequest, BaseResponse } from '../helpers/response';
 import { LoggerInstance } from 'winston';
 import SimpleLogger from '../../logger';
-import { HttpServerErrors } from "./http/HttpCode";
-import HttpError from "./http/HttpError";
+import { HttpServerErrors } from './http/HttpCode';
+import HttpError from './http/HttpError';
 
 export interface ErrorReporterOptions {
   raven?: Raven.Client;
@@ -14,7 +14,7 @@ export interface ErrorDefinitions {
   [code: string]: {
     status: number;
     message: number;
-  }
+  };
 }
 
 export class ErrorReporter {
@@ -34,7 +34,7 @@ export class ErrorReporter {
       app.use((req, res) => reporter.notFound(req, res));
       app.use((error, req, res, next) => reporter.unknownError(error, req, res, next));
     };
-  };
+  }
 
   notFound(req: BaseRequest, res: BaseResponse) {
     // Build error instance
@@ -46,9 +46,9 @@ export class ErrorReporter {
     // Send to Sentry if available
     if (this.options.raven) {
       this.options.raven.captureException(error, {
-        req: req,
+        req,
         level: 'warning',
-        tags: { stackId: error.stackId }
+        tags: { stackId: error.stackId },
       } as any);
     }
 
@@ -70,7 +70,7 @@ export class ErrorReporter {
       serverError = error as HttpError;
     } else {
       serverError = new HttpError(error.message, error.status || HttpServerErrors.INTERNAL_SERVER_ERROR, {
-        code: error.code ? error.code : undefined
+        code: error.code ? error.code : undefined,
       });
       serverError.stack = error.stack || serverError.stack;
     }
@@ -78,9 +78,9 @@ export class ErrorReporter {
     // Send to Sentry if available
     if (this.options.raven) {
       this.options.raven.captureException(serverError, {
-        req: req,
+        req,
         level: serverError.status >= 500 ? 'error' : 'warning',
-        tags: { stackId: serverError.stackId }
+        tags: { stackId: serverError.stackId },
       } as any);
     }
 

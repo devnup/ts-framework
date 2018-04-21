@@ -1,13 +1,12 @@
 /// <reference types="mongoose" />
 /// <reference types="winston" />
-import Plugins from './plugins';
 import * as mongoose from 'mongoose';
-import { BaseModel } from "./model";
+import { BaseModel } from './model';
 import { Model } from './decorators';
-import BaseError from "../error/BaseError";
-import { LoggerInstance } from "winston";
+import BaseError from '../error/BaseError';
+import { LoggerInstance } from 'winston';
 declare const Schema: typeof mongoose.Schema;
-export { Model, Schema, Plugins, BaseModel };
+export { Model, Schema, BaseModel };
 export { BaseModel as BaseDAO };
 export declare class DatabaseError extends BaseError {
 }

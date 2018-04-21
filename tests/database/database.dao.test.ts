@@ -1,12 +1,13 @@
 import MongodbMemoryServer from 'mongodb-memory-server';
-import { Model } from "../../lib/database/decorators";
-import Database, { BaseModel, Plugins, Schema } from "../../lib/database";
+import { Model } from '../../lib/database/decorators';
+import Database, { BaseModel, Schema } from '../../lib/database';
 
 // May require additional time for downloading MongoDB binaries
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
 
 describe('lib.Database', () => {
-  let mongoServer, db;
+  let db;
+  let mongoServer;
 
   beforeAll(async () => {
     mongoServer = (new MongodbMemoryServer());
@@ -21,12 +22,9 @@ describe('lib.Database', () => {
     await mongoServer.stop();
   });
 
-  it("should instantiate a simple model extending a dao", async () => {
+  it('should instantiate a simple model extending a dao', async () => {
 
-    const TestSchema = new Schema({ status: { type: String, 'default': 'ok' } });
-
-    TestSchema.plugin(Plugins.CreatedAt);
-    TestSchema.plugin(Plugins.UpdatedAt);
+    const TestSchema = new Schema({ status: { type: String, default: 'ok' } });
 
     abstract class TestDAO extends BaseModel {
       static findByStatus(status) {
@@ -53,7 +51,7 @@ describe('lib.Database', () => {
     expect(db.mongoose.connection.models[TestModel.COLLECTION]).toHaveProperty('schema');
     expect(db.mongoose.connection.models[TestModel.COLLECTION].schema.obj).toHaveProperty('status');
 
-    let testModel = db.model(TestModel.COLLECTION, TestModel);
+    const testModel = db.model(TestModel.COLLECTION, TestModel);
     expect(testModel).toHaveProperty('findByStatus');
 
     expect(await testModel.findByStatus('random')).toHaveProperty('length', 0);

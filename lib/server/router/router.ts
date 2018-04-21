@@ -1,11 +1,10 @@
 import * as path from 'path';
 import * as util from 'util';
 import * as express from 'express';
-import { Application } from 'express';
 import * as cleanStack from 'clean-stack';
 import asyncMiddleware from '../middlewares/async';
 import FiltersWrapper from '../helpers/filter';
-import { LoggerInstance } from "winston";
+import { LoggerInstance } from 'winston';
 
 // TODO: Inject this constants from outside
 // Prepare static full paths, relative to project root
@@ -14,12 +13,12 @@ const ctrl_path = '../../../api/controllers';
 const BASE_CTRLS_PATH = path.join(__dirname, ctrl_path);
 
 export interface ServerRouterOptions {
-  logger?: LoggerInstance,
-  app?: Application,
+  logger?: LoggerInstance;
+  app?: express.Application;
   path: {
     controllers?: string;
     filters?: string;
-  }
+  };
 }
 
 export default class ServerRouter {
@@ -29,6 +28,7 @@ export default class ServerRouter {
   options: ServerRouterOptions;
 
   constructor(controllers: any, routes: any, options: ServerRouterOptions = { path: {} }) {
+
     if (!controllers && !routes) {
       throw new Error('Could not initialize the router without routes or controllers');
     }
@@ -38,15 +38,15 @@ export default class ServerRouter {
     this.options.path = this.options.path || {};
     this.options.path.controllers = this.options.path.controllers || BASE_CTRLS_PATH;
 
-    routes = routes || {};
-    controllers = controllers || {};
-    const decoratedRoutes = this.decoratedRoutes(controllers);
+    const r = routes || {};
+    const c = controllers || {};
+    const decoratedRoutes = this.decoratedRoutes(c);
 
     this.routes = {
-      get: { ...decoratedRoutes.get, ...routes.get },
-      post: { ...decoratedRoutes.post, ...routes.post },
-      put: { ...decoratedRoutes.put, ...routes.put },
-      'delete': { ...decoratedRoutes.delete, ...routes.delete },
+      get: { ...decoratedRoutes.get, ...r.get },
+      post: { ...decoratedRoutes.post, ...r.post },
+      put: { ...decoratedRoutes.put, ...r.put },
+      delete: { ...decoratedRoutes.delete, ...r.delete },
     };
 
     this.init();
@@ -61,7 +61,7 @@ export default class ServerRouter {
   prepareControllerMethods(method, ctrl) {
     const decoratedRoutes = {};
 
-    Object.keys(ctrl.routes[method] || {}).map(route => {
+    Object.keys(ctrl.routes[method] || {}).map((route: string) => {
       if (ctrl.baseFilters) {
         ctrl.routes[method][route].filters = ctrl.baseFilters.concat(ctrl.routes[method][route].filters);
       }
@@ -85,7 +85,7 @@ export default class ServerRouter {
    * @returns {Object}
    */
   decoratedRoutes(controllers) {
-    let decoratedRoutes = { get: {}, post: {}, put: {}, 'delete': {} };
+    const decoratedRoutes = { get: {}, post: {}, put: {}, delete: {} };
 
     // Prepare API routes and its controllers from decorators
     Object.keys(controllers || {}).map(name => ({
@@ -93,7 +93,7 @@ export default class ServerRouter {
       baseRoute: controllers[name].baseRoute,
       baseFilters: controllers[name].baseFilters,
       routes: controllers[name].routes(),
-    })).map(ctrl => {
+    })).map((ctrl: any) => {
       decoratedRoutes.get = {
         ...decoratedRoutes.get,
         ...this.prepareControllerMethods('get', ctrl),
@@ -117,7 +117,7 @@ export default class ServerRouter {
 
   init() {
     const map = this.routes;
-    Object.keys(map).map((method) => this.bindMethod(method, map[method]));
+    Object.keys(map).map(method => this.bindMethod(method, map[method]));
   }
 
   /**
@@ -138,7 +138,7 @@ export default class ServerRouter {
 
         // Get controller from map
         // noinspection JSUnresolvedVariable
-        let ctrl = this.registerController(routes, r);
+        const ctrl = this.registerController(routes, r);
 
         // Add the filters wrapper instance to the routes map
         if (routes[r].filters && routes[r].filters.length) {
@@ -207,7 +207,7 @@ export default class ServerRouter {
    *
    * @returns {express.Application}
    */
-  register(app?: Application) {
+  register(app?: express.Application) {
     this.app = app || express();
     for (const method in this.routes) {
       if (this.routes.hasOwnProperty(method)) {

@@ -1,12 +1,13 @@
 import * as mongoose from 'mongoose';
-import Database from "../../lib/database";
+import Database from '../../lib/database';
 import MongodbMemoryServer from 'mongodb-memory-server';
 
 // May require additional time for downloading MongoDB binaries
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
 
 describe('lib.Database', () => {
-  let mongoUri, mongoServer;
+  let mongoUri;
+  let mongoServer;
 
   beforeAll(async () => {
     mongoServer = (new MongodbMemoryServer());
@@ -14,13 +15,13 @@ describe('lib.Database', () => {
   });
 
   afterAll(async () => {
-    if(mongoose.connection.readyState) {
+    if (mongoose.connection.readyState) {
       await mongoose.disconnect();
     }
     await mongoServer.stop();
   });
 
-  it("should instantiate a simple database", async () => {
+  it('should instantiate a simple database', async () => {
     const db = new Database({ url: mongoUri });
     await db.connect();
     expect(db.isReady()).toBe(true);
@@ -28,7 +29,7 @@ describe('lib.Database', () => {
     expect(db.isReady()).toBe(false);
   });
 
-  it("should not connect to invalid url", async () => {
+  it('should not connect to invalid url', async () => {
     expect.assertions(2);
     const db = new Database({ url: 'mongodb://abcde.efg:1234/invalid' });
     try {

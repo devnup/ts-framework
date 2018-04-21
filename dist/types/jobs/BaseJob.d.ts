@@ -1,4 +1,4 @@
-import Server from "../server";
+import Server from '../server';
 export default abstract class BaseJob {
     name: String;
     options: any;

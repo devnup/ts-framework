@@ -19,9 +19,8 @@ export {
   DatabaseOptions,
   Model,
   Schema,
-  Plugins,
   BaseModel,
-  BaseDAO
+  BaseDAO,
 } from './database';
 
 export { default as Assertion } from './assertion';

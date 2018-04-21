@@ -1,5 +1,5 @@
-import BaseError from "../../../error/BaseError";
-import { HttpCode } from "./HttpCode";
+import BaseError from '../../../error/BaseError';
+import { HttpCode } from './HttpCode';
 
 
 export default class HttpError extends BaseError {
@@ -13,7 +13,7 @@ export default class HttpError extends BaseError {
   public toObject(): any {
     return {
       status: this.status,
-      ...super.toObject()
-    }
+      ...super.toObject(),
+    };
   }
 }

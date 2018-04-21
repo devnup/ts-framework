@@ -11,10 +11,10 @@ import * as OAuthServer from 'express-oauth-server';
 import { LoggerInstance } from 'winston';
 import { Router } from './router';
 import { cors, legacyParams, responseBinder } from './middlewares/index';
-import { default as errorMiddleware, ErrorDefinitions } from "./error/ErrorReporter";
-import SimpleLogger from "../logger/index";
-import { BaseRequest } from "../base/BaseRequest";
-import { BaseResponse } from "../base/BaseResponse";
+import { default as errorMiddleware, ErrorDefinitions } from './error/ErrorReporter';
+import SimpleLogger from '../logger/index';
+import { BaseRequest } from '../base/BaseRequest';
+import { BaseResponse } from '../base/BaseResponse';
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
@@ -38,11 +38,11 @@ export {
 };
 
 export interface ServerOptions {
-  port: number,
-  secret?: string,
-  routes?: any,
-  cors?: boolean,
-  userAgent?: boolean,
+  port: number;
+  secret?: string;
+  routes?: any;
+  cors?: boolean;
+  userAgent?: boolean;
   controllers?: object;
   bodyLimit?: string;
   path?: {
@@ -56,7 +56,7 @@ export interface ServerOptions {
     pipeline: BaseJob[];
     [key: string]: any;
   };
-  multer?: any,
+  multer?: any;
   oauth?: {
     model: any; // TODO: Specify the signature
     useErrorHandler?: boolean;
@@ -69,7 +69,7 @@ export interface ServerOptions {
       requireClientAuthentication?: boolean;
       allowExtendedTokenAttributes?: boolean;
     }
-  },
+  };
   logger?: LoggerInstance;
   errors?: ErrorDefinitions;
 }
@@ -85,7 +85,7 @@ export default class Server {
     // Prepare server configuration
     this.config = {
       ...config,
-      port: config.port || 3000
+      port: config.port || 3000,
     };
 
     // Start by registering Sentry if available
@@ -95,7 +95,7 @@ export default class Server {
       Raven.config(this.config.sentry.dsn, {
         autoBreadcrumbs: true,
         logger: 'devnup-server',
-        release: SENTRY_RELEASE
+        release: SENTRY_RELEASE,
       }).install();
 
       this.app.use(Raven.requestHandler());
@@ -106,7 +106,7 @@ export default class Server {
       this.app.use((req: BaseRequest, res, next) => {
         req.logger = this.logger;
         next();
-      })
+      });
     }
 
     // Handle post initialization routines
@@ -123,7 +123,7 @@ export default class Server {
       // Get http server instance
       this._server = this.app.listen(this.config.port, () => {
         this.onStartup().then(() => resolve(this.config)).catch((error: Error) => reject(error));
-      }).on('error', (error: Error) => reject(error))
+      }).on('error', (error: Error) => reject(error));
     });
   }
 
@@ -235,7 +235,7 @@ export default class Server {
 
     errorMiddleware(this.config.errors, {
       logger: this.logger,
-      raven: this.config.sentry ? Raven : undefined
+      raven: this.config.sentry ? Raven : undefined,
     })(this.app);
 
   }

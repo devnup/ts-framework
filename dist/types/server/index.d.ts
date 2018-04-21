@@ -1,8 +1,8 @@
 /// <reference types="winston" />
 import { LoggerInstance } from 'winston';
-import { ErrorDefinitions } from "./error/ErrorReporter";
-import { BaseRequest } from "../base/BaseRequest";
-import { BaseResponse } from "../base/BaseResponse";
+import { ErrorDefinitions } from './error/ErrorReporter';
+import { BaseRequest } from '../base/BaseRequest';
+import { BaseResponse } from '../base/BaseResponse';
 import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';

@@ -1,6 +1,6 @@
 /// <reference types="winston" />
 import * as Raven from 'raven';
-import { BaseRequest, BaseResponse } from "../helpers/response";
+import { BaseRequest, BaseResponse } from '../helpers/response';
 import { LoggerInstance } from 'winston';
 export interface ErrorReporterOptions {
     raven?: Raven.Client;

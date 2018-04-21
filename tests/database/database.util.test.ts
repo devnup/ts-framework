@@ -1,9 +1,9 @@
 import * as URI from 'urijs';
-import {maskAuthUrl} from "../../lib/database/util";
+import { maskAuthUrl } from '../../lib/database/util';
 
 describe('lib.database.Util', () => {
 
-  it("should mask an authentication url", async () => {
+  it('should mask an authentication url', async () => {
     const url = 'mongodb://someuser:somepass@localhost:27017/test';
     const masked = maskAuthUrl(url);
 

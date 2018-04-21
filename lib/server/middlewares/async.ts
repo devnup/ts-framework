@@ -1,7 +1,9 @@
-import * as util from "util";
+import * as util from 'util';
 import { Request, Response } from 'express';
 
-const asyncMiddleware = (fns: Function | Function[]) => {
+const asyncMiddleware = (functions: Function | Function[]) => {
+  let fns = functions;
+  
   // Ensure input as an array
   if (!util.isArray(fns)) {
     fns = [fns];
@@ -20,7 +22,7 @@ const asyncMiddleware = (fns: Function | Function[]) => {
     } catch (error) {
       next(error);
     }
-  })
+  });
 };
 
 export default asyncMiddleware;

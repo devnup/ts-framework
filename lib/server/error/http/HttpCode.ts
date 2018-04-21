@@ -33,4 +33,4 @@ export default {
   Redirect: HttpRedirect,
   Client: HttpClientErrors,
   Server: HttpServerErrors,
-}
+};

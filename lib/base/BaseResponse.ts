@@ -1,6 +1,6 @@
-import { Response } from "express";
-import HttpError from "../server/error/http/HttpError";
-import BaseError from "../error/BaseError";
+import { Response } from 'express';
+import HttpError from '../server/error/http/HttpError';
+import BaseError from '../error/BaseError';
 
 export interface BaseResponse extends Response {
   error(status: number, error: Error): void;

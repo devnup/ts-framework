@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 export interface BaseModelConstructor {
   new(...args: any[]): {};
@@ -8,8 +8,14 @@ export interface BaseModelConstructor {
 }
 
 /**
- * @Model(name [, database])
- */
+ * @Model
+ * 
+ * The decorator for assigning a Schema to a Mongoose Model.
+ * 
+ * @param name The mongoose model name
+ * @param schema The mongoode schema
+ */ 
+ // tslint:disable-next-line:function-name
 export function Model(name: string, schema?: Schema) {
   return function controllerDecorator<T extends BaseModelConstructor>(constructor: T) {
 
@@ -24,6 +30,6 @@ export function Model(name: string, schema?: Schema) {
     return class extends constructor {
       static modelName = name;
       static Schema = constructor.Schema;
-    }
-  }
+    };
+  };
 }

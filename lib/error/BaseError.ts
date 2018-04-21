@@ -5,7 +5,7 @@ export class BaseErrorDetails {
   [key: string]: any;
 
   constructor(data = {}) {
-    for (let key in data) {
+    for (const key in data) {
       if (data.hasOwnProperty(key)) {
         this[key] = data[key];
       }
@@ -18,7 +18,7 @@ export default class BaseError extends Error {
   details: BaseErrorDetails;
 
   constructor(message, details: object = {}) {
-    let stackId = uuid.v4();
+    const stackId = uuid.v4();
     super(`${message} (stackId: ${stackId})`);
     this.stackId = stackId;
     this.name = this.constructor.name;
@@ -37,7 +37,7 @@ export default class BaseError extends Error {
       stackId: this.stackId,
       details: this.details,
       stack: cleanStack(this.stack),
-    }
+    };
   }
 
   public toJSON(stringify = false): object | string {

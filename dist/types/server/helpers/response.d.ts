@@ -1,9 +1,9 @@
 /// <reference types="express" />
 /// <reference types="winston" />
-import { LoggerInstance } from "winston";
+import { LoggerInstance } from 'winston';
 import { Request, Response } from 'express';
-import BaseError from "../../error/BaseError";
-import { default as HttpError } from "../error/http/HttpError";
+import BaseError from '../../error/BaseError';
+import { default as HttpError } from '../error/http/HttpError';
 export interface BaseRequest extends Request {
     file?: any;
     user?: any;

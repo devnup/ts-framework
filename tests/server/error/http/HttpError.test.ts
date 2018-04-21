@@ -1,5 +1,5 @@
-import HttpError from "../../../../lib/server/error/http/HttpError";
-import { HttpClientErrors } from "../../../../lib/server/error/http/HttpCode";
+import HttpError from '../../../../lib/server/error/http/HttpError';
+import { HttpClientErrors } from '../../../../lib/server/error/http/HttpCode';
 
 describe('HttpError', () => {
   it('should instantiate a simple error', () => {
@@ -15,5 +15,5 @@ describe('HttpError', () => {
     expect(error).toHaveProperty('details');
     expect(error).toHaveProperty('status', 403);
     expect(error.details).toHaveProperty('test', 'ok');
-  })
+  });
 });
