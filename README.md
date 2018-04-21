@@ -118,9 +118,7 @@ Other external plugins and middlewares for this framework
 
 Checkout the rendered TS Docs in the official page: [https://devnup.github.io/ts-framework/](https://devnup.github.io/ts-framework/)
 
-## Full module reference
-
-To generate the Typedoc reference of the available modules, run the following command:
+To generate the Typedoc reference of the available modules directly from source, run the following command:
 
 ```sh
 yarn run docs
