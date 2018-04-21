@@ -61,22 +61,16 @@ You can also check a full project seed in the [Examples directory](./examples) o
 Follow the [Usage Guide](./GUIDE.md) for the basic boilerplate and a sample project configuration with
 Database and user authentication samples.
 
-
-## Documentation
-
-It's in the roadmap an automated documentation based on JSDocs. Currently there are only the JSDocs tags inside of some 
-key class and components.
-
 Internal components:
 
-- Logger
-- Database
-- Router
-  - Controllers
-  - Filters
-  - Responses
+- Logger (backed by [winston](https://npmjs.org/package/winston))
+- Database (backed by [Mongoose](https://npmjs.org/package/mongoose))
+- Router (backed by [Express](https://npmjs.org/package/express))
+  - **Controllers:** Classes for handling API calls with decorators and async/await support
+  - **Filters:** Middlewares for body validation, permission handling and other interception routines
+  - **Responses:**: Simple wrappers over `res.status(code).json(result)` for success and error responses.
 
-External components already available as middlewares: 
+External components available as built-in middlewares: 
 
 - OAuth 2.0 (express-oauth2-server)
 - Sentry (RavenJS)
@@ -87,7 +81,7 @@ External components already available as middlewares:
 - Method Override (express/method-override)
 - Cookie Parser (express/cookie-parser)
 
-Other external plugins and middlewares for the framework
+Other external plugins and middlewares for this framework
 
 - **[ts-framework-versioning](https://gitlab.devnup.com/npm/ts-framework-versioning)**
 
@@ -117,6 +111,8 @@ Other external plugins and middlewares for the framework
 
     MySQL / Postgres database layer based on Sequelize. Currently in closed alpha.
 
+
+## Documentation
 
 
 ### Server
