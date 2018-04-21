@@ -68,7 +68,7 @@ Internal components:
 - Router (backed by [Express](https://npmjs.org/package/express))
   - **Controllers:** Classes for handling API calls with decorators and async/await support
   - **Filters:** Middlewares for body validation, permission handling and other interception routines
-  - **Responses:**: Simple wrappers over `res.status(code).json(result)` for success and error responses.
+  - **Responses:**: Simple wrappers over `res.status(code).json(result)` for success and error responses.
 
 External components available as built-in middlewares: 
 
