@@ -12,11 +12,13 @@
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
-    "clean": "rimraf ./dist/",
+    "prebuild": "rimraf ./dist",
     "test": "jest --config jest.json",
     "docs": "./scripts/docs.sh",
+    "predocs": "rimraf ./docs",
+    "release": "yarn run -s build && yarn run -s docs",
     "coveralls": "((cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js) || true)",
-    "precommit": "yarn run -s clean && yarn run -s build && yarn test"
+    "precommit": "yarn run -s lint && yarn test"
   },
   "engines": {
     "node": "8",

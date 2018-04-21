@@ -107,7 +107,7 @@ server.listen()
     process.exit(<span class="hljs-number">1</span>);
   });
 </code></pre>
-				<p>You can also check a full project seed in the <a href="./examples">Examples directory</a> of this repository.</p>
+				<p>You can also check a full project seed in the <a href="./example">Examples directory</a> of this repository.</p>
 				<h3 id="usage-guide">Usage Guide</h3>
 				<p>Follow the <a href="./GUIDE.md">Usage Guide</a> for the basic boilerplate and a sample project configuration with
 				Database and user authentication samples.</p>
@@ -158,61 +158,8 @@ server.listen()
 					</li>
 				</ul>
 				<h2 id="documentation">Documentation</h2>
-				<h3 id="server">Server</h3>
-				<p>The basic HTTP Server definitions, wraps an Express to integrate all framework modules.</p>
-				<h4 id="utility-classes">Utility classes</h4>
-				<ul>
-					<li><strong>Logger</strong>: A simple Logger based on <a href="https://npmjs.org/package/winston">Winston</a>.</li>
-				</ul>
-				<h4 id="base-classes">Base classes</h4>
-				<ul>
-					<li><p><strong>BaseError</strong>: The base error instance for all framework exceptions.</p>
-						<ul>
-							<li><code>error.stackId</code>: An unique uuid/v4 for Errors to be sent to external service, such as ELK or Sentry.</li>
-							<li><code>error.details</code>: An object with misc details associated with the error instance. </li>
-						</ul>
-					</li>
-					<li><p><strong>BaseRequest</strong>: Extends Express.js request class for framework binding.</p>
-						<ul>
-							<li><code>request.logger</code>: The Server logger instance, if supplied in the Server constructor.</li>
-						</ul>
-					</li>
-					<li><p><strong>BaseResponse</strong>: Extends Express.js response class for framework binding.</p>
-						<ul>
-							<li><code>response.success(data: any)</code>: A shortcut for setting status as <code>200</code> and calling <code>data.toJSON()</code> if available.</li>
-							<li><code>response.error(error: String | Error)</code>: Handles errors before sending to response, cleaning the stack and assigned an unique <code>stackId</code>.</li>
-						</ul>
-					</li>
-				</ul>
-				<h4 id="decorators">Decorators</h4>
-				<ul>
-					<li><p><strong>@Controller(baseRoute: string, middlewares?: Function[])</strong>: Decorator for controller classes.</p>
-					</li>
-					<li><p><strong>@Get(route: string, middlewares?: Function[])</strong>: Decorator for GET methods, must be static.</p>
-					</li>
-					<li><p><strong>@Post(route: string, middlewares?: Function[])</strong>: Decorator for POST methods, must be static.</p>
-					</li>
-					<li><p><strong>@Put(route: string, middlewares?: Function[])</strong>: Decorator for PUT methods, must be static.</p>
-					</li>
-					<li><p><strong>@Delete(route: string, middlewares?: Function[])</strong>: Decorator for DELETE methods, must be static.</p>
-					</li>
-				</ul>
-				<h3 id="database">Database</h3>
-				<p>The MongoDB ODM definitions.</p>
-				<h4 id="base-classes">Base classes</h4>
-				<ul>
-					<li><strong>BaseModel</strong>: The base class for all model instances decorated with <code>@Model</code>. <ul>
-							<li><code>BaseModel.modelName</code>: The name of the model collection in MongoDB, as supplied in the <code>@Model</code> decorator.</li>
-						</ul>
-					</li>
-				</ul>
-				<h4 id="decorators">Decorators</h4>
-				<ul>
-					<li><strong>@Model(name: string)</strong>: Assigns a name for the decorated model class to be used as collection name in MongoDB. Must
-					be used in classes that extends <code>BaseModel</code>.</li>
-				</ul>
-				<h2 id="full-module-reference">Full module reference</h2>
-				<p>To generate the Typedoc reference of the available modules, run the following command:</p>
+				<p>Checkout the rendered TS Docs in the official page: <a href="https://devnup.github.io/ts-framework/">https://devnup.github.io/ts-framework/</a></p>
+				<p>To generate the Typedoc reference of the available modules directly from source, run the following command:</p>
 				<pre><code class="lang-sh">yarn run docs
 </code></pre>
 				<p>Then check the documentation at <code>./docs/index.html</code>.</p>
