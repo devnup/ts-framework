@@ -1,8 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const createdAt_1 = require("./createdAt");
-exports.CreatedAt = createdAt_1.default;
-const updatedAt_1 = require("./updatedAt");
-exports.UpdatedAt = updatedAt_1.default;
-exports.default = { CreatedAt: createdAt_1.default, UpdatedAt: updatedAt_1.default };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9saWIvZGF0YWJhc2UvcGx1Z2lucy9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDJDQUFvQztBQUczQixvQkFIRixtQkFBUyxDQUdFO0FBRmxCLDJDQUFvQztBQUVoQixvQkFGYixtQkFBUyxDQUVhO0FBQzdCLGtCQUFlLEVBQUUsU0FBUyxFQUFULG1CQUFTLEVBQUUsU0FBUyxFQUFULG1CQUFTLEVBQUUsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBDcmVhdGVkQXQgZnJvbSAnLi9jcmVhdGVkQXQnO1xuaW1wb3J0IFVwZGF0ZWRBdCBmcm9tICcuL3VwZGF0ZWRBdCc7XG5cbmV4cG9ydCB7IENyZWF0ZWRBdCwgVXBkYXRlZEF0IH07XG5leHBvcnQgZGVmYXVsdCB7IENyZWF0ZWRBdCwgVXBkYXRlZEF0IH07XG4iXX0=

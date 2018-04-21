@@ -15,6 +15,7 @@
     "clean": "rimraf ./dist/",
     "test": "jest --config jest.json",
     "docs": "./scripts/docs.sh",
+    "coveralls": "((cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js) || true)",
     "precommit": "yarn run -s clean && yarn run -s build && yarn test"
   },
   "engines": {
@@ -60,6 +61,7 @@
   "devDependencies": {
     "@types/jest": "^21.1.2",
     "@types/supertest": "^2.0.3",
+    "coveralls": "^3.0.0",
     "devnup-typedoc-theme": "git+https://gitlab.devnup.com/npm/devnup-typedoc-theme.git#master",
     "husky": "^0.14.3",
     "jest": "^21.2.1",

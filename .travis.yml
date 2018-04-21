@@ -5,4 +5,5 @@ node_js:
 install:
   - yarn install
 script:
-  - yarn test
+  - yarn run -s test
+  - yarn run -s coveralls
