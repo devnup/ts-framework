@@ -1,9 +1,7 @@
 ts-framework
 ============
 
-[![Build Status](https://travis-ci.org/devnup/ts-framework.svg?branch=master)](https://travis-ci.org/devnup/ts-framework)
-
-[![Coverage Status](https://coveralls.io/repos/github/devnup/ts-framework/badge.svg?branch=master)](https://coveralls.io/github/devnup/ts-framework?branch=master)
+[![Build Status](https://travis-ci.org/devnup/ts-framework.svg?branch=master)](https://travis-ci.org/devnup/ts-framework) &nbsp; [![Coverage Status](https://coveralls.io/repos/github/devnup/ts-framework/badge.svg?branch=master)](https://coveralls.io/github/devnup/ts-framework?branch=master)
 
 A minimalistic framework for typescript based applications, with async/await and decorators support.
 
