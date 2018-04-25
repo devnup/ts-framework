@@ -97,9 +97,9 @@ Other external plugins and middlewares for this framework
 
     Advanced usage plugin for handling Schema migrations safely within production environments.
 
-- **ts-framework-sockets (coming soon)**
+- **[ts-framework-sockets](https://github.com/nxtep-io/ts-framework-sockets)**
 
-    Socket.io layer over the TS-Framework. Currently in closed alpha.
+    Socket.io layer over the TS-Framework. Currently in public alpha.
 
 - **ts-framework-queue (coming soon)**
 
