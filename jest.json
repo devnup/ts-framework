@@ -18,7 +18,6 @@
     "json"
   ],
   "testPathIgnorePatterns": [
-    "./build",
     "./tests/__mock__"
   ]
 }
