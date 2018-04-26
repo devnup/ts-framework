@@ -12,6 +12,6 @@ node_js:
 services:
   - mongodb
 script:
-  - npm run test
+  - yarn run test
 after_success:
-  - npm run coveralls
+  - yarn run coveralls
