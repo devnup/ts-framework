@@ -85,11 +85,11 @@ External components available as built-in middlewares:
 
 Other external plugins and middlewares for this framework
 
-- **[ts-framework-versioning](https://gitlab.devnup.com/npm/ts-framework-versioning)**
+- **[ts-framework-versioning](https://github.com/devnup/ts-framework-versioning)**
 
     Handles API versioning using HTTP Headers.
     
-- **[ts-framework-notification](https://gitlab.devnup.com/npm/ts-framework-notification)**
+- **[ts-framework-notification](https://github.com/devnup/ts-framework-notification)**
 
     Handles transactional notifications using SMTP (email templates) and Firebase Messaging (push notifications).
 
