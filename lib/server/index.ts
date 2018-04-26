@@ -19,6 +19,7 @@ import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
 import BaseJob from '../jobs/BaseJob';
+import { CorsOptions } from 'cors';
 
 const Logger = SimpleLogger.getInstance();
 
@@ -41,7 +42,7 @@ export interface ServerOptions {
   port: number;
   secret?: string;
   routes?: any;
-  cors?: boolean;
+  cors?: boolean | CorsOptions;
   userAgent?: boolean;
   controllers?: object;
   bodyLimit?: string;
