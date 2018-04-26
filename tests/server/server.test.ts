@@ -4,6 +4,9 @@ import Server from '../../lib/server/index';
 import { Controller, Get } from '../../lib/server/router/decorators';
 import SimpleLogger from '../../lib/logger/index';
 
+// May require additional time for downloading MongoDB binaries
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
+
 describe('lib.Server', () => {
   it('should crash without controllers or routes', async () => {
     expect(() => new Server({ port: 3333 })).toThrow(/router without routes or controllers/);
