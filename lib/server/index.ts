@@ -150,10 +150,7 @@ export default class Server {
       if (this.logger) {
         this.logger.info('Initializing server middleware: CORS');
       }
-      this.app.use(cors({
-        allowedHeaders: '*',
-        exposedHeaders: '*',
-      }));
+      this.app.use(cors(this.config.cors !== true ? this.config.cors : {}));
     }
 
     // Handle multer middleware

@@ -1,4 +1,5 @@
 /// <reference types="winston" />
+/// <reference types="cors" />
 import { LoggerInstance } from 'winston';
 import { ErrorDefinitions } from './error/ErrorReporter';
 import { BaseRequest } from '../base/BaseRequest';
@@ -7,6 +8,7 @@ import { Controller, Get, Post, Put, Delete } from './router/decorators';
 import HttpCode from './error/http/HttpCode';
 import HttpError from './error/http/HttpError';
 import BaseJob from '../jobs/BaseJob';
+import { CorsOptions } from 'cors';
 declare const Logger: LoggerInstance;
 export { default as response } from './helpers/response';
 export { BaseRequest, BaseResponse, Logger, Controller, Get, Post, Put, Delete, HttpCode, HttpError };
@@ -14,7 +16,7 @@ export interface ServerOptions {
     port: number;
     secret?: string;
     routes?: any;
-    cors?: boolean;
+    cors?: boolean | CorsOptions;
     userAgent?: boolean;
     controllers?: object;
     bodyLimit?: string;
