@@ -10,7 +10,7 @@ export default class StatusController {
     res.success({
       name: Package.name,
       version: Package.version,
-      environment: process.env.NODE_ENV || 'development',
+      environment: 'development',
       uptime: Date.now() - StatusController.STARTED_AT,
     });
   }

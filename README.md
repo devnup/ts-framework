@@ -8,10 +8,10 @@ A minimalistic framework for typescript based applications, with async/await and
 
 ## Getting Started
 
-### Release Candidate Disclaimer
+### Alpha Disclaimer
 
-The current API is considered to be a "Release Candidate". That means that small, potentially breaking 
-changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
+The current API is considered to be an "Alpha Release" of the v2 branch. That means that big, probably breaking 
+changes are expected. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
 won't be immediately affected by such a change.
 
 For example:
@@ -66,7 +66,6 @@ Database and user authentication samples.
 Internal components:
 
 - Logger (backed by [winston](https://npmjs.org/package/winston))
-- Database (backed by [Mongoose](https://npmjs.org/package/mongoose))
 - Router (backed by [Express](https://npmjs.org/package/express))
   - **Controllers:** Classes for handling API calls with decorators and async/await support
   - **Filters:** Middlewares for body validation, permission handling and other interception routines
@@ -111,7 +110,11 @@ Other external plugins and middlewares for this framework
 
 - **ts-framework-sql (coming soon)**
 
-    MySQL / Postgres database layer based on Sequelize. Currently in closed alpha.
+    MySQL / Postgres database layer based on TypeORM. Currently in closed alpha.
+
+- **ts-framework-mongo (coming soon)**
+
+    MongoDB database layer based on Mongoose. Currently in closed alpha.
 
 
 ## Documentation
@@ -125,6 +128,14 @@ yarn run docs
 ```
 
 Then check the documentation at `./docs/index.html`.
+
+## Migration Guide
+
+This migration is a draft.
+
+The v2 breaking changes are listed below:
+
+- Database layer moved to its own package
 
 
 ## License

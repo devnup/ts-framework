@@ -16,32 +16,22 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@types/async@^2.0.44":
-  version "2.0.44"
-  resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.44.tgz#e846150fd1f5a3243cec7c1f5bb49f58241092ee"
-
-"@types/body-parser@^1.16.5":
-  version "1.16.5"
-  resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.16.5.tgz#d2b7daefab84e0afa9d3fae0935bc7355b6320af"
+"@types/body-parser@*":
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.17.0.tgz#9f5c9d9bd04bb54be32d5eb9fc0d8c974e6cf58c"
   dependencies:
-    "@types/express" "*"
+    "@types/connect" "*"
     "@types/node" "*"
 
-"@types/bson@*":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-1.0.4.tgz#94260b6b96fa459346959c9216799d8919e95d2b"
+"@types/connect@*":
+  version "3.4.32"
+  resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.32.tgz#aa0e9616b9435ccad02bc52b5b454ffc2c70ba28"
   dependencies:
     "@types/node" "*"
 
-"@types/cookie-parser@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@types/cookie-parser/-/cookie-parser-1.4.1.tgz#e88a39c41960f31549b4c52dd8620aa4a2feb4bb"
-  dependencies:
-    "@types/express" "*"
-
-"@types/cors@^2.8.1":
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.1.tgz#54073caf3b7a741e67fb82483f83a6cadfba7501"
+"@types/cors@^2.8.4":
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.4.tgz#50991a759a29c0b89492751008c6af7a7c8267b0"
   dependencies:
     "@types/express" "*"
 
@@ -51,10 +41,18 @@
   dependencies:
     "@types/node" "*"
 
-"@types/express@*", "@types/express@^4.0.37":
+"@types/express@*":
   version "4.0.37"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.0.37.tgz#625ac3765169676e01897ca47011c26375784971"
   dependencies:
+    "@types/express-serve-static-core" "*"
+    "@types/serve-static" "*"
+
+"@types/express@^4.11.1":
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.11.1.tgz#f99663b3ab32d04cb11db612ef5dd7933f75465b"
+  dependencies:
+    "@types/body-parser" "*"
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
@@ -62,39 +60,13 @@
   version "22.2.3"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.3.tgz#0157c0316dc3722c43a7b71de3fdf3acbccef10d"
 
-"@types/method-override@^0.0.30":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@types/method-override/-/method-override-0.0.30.tgz#b44b679a557fc3463ace872f37470f4502f367ce"
-  dependencies:
-    "@types/express" "*"
-
 "@types/mime@*":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
-"@types/mongodb@*":
-  version "2.2.14"
-  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-2.2.14.tgz#eeee3a18e784dba0d3c156fddb7f462fc7a61eb2"
-  dependencies:
-    "@types/bson" "*"
-    "@types/node" "*"
-
-"@types/mongoose@^4.7.23":
-  version "4.7.24"
-  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-4.7.24.tgz#4aa853085bff9a72d03e7bea9ca100a4597846ea"
-  dependencies:
-    "@types/mongodb" "*"
-    "@types/node" "*"
-
 "@types/node@*":
   version "8.0.46"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.46.tgz#6e1766b2d0ed06631d5b5f87bb8e72c8dbb6888e"
-
-"@types/raven@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@types/raven/-/raven-2.1.2.tgz#f066762a40aa3dd2fa8dbfc046ab4ecaf9bf03a4"
-  dependencies:
-    "@types/node" "*"
 
 "@types/serve-static@*":
   version "1.7.32"
@@ -115,9 +87,9 @@
   dependencies:
     "@types/superagent" "*"
 
-"@types/winston@^2.3.6":
-  version "2.3.6"
-  resolved "https://registry.yarnpkg.com/@types/winston/-/winston-2.3.6.tgz#0f0954b9e16abd40598dc6e9cc2ea43044237997"
+"@types/winston@^2.3.9":
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/@types/winston/-/winston-2.3.9.tgz#1ff9f1bb57952fe3d88c1b21c4899ede316a35bc"
   dependencies:
     "@types/node" "*"
 
@@ -2813,16 +2785,6 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-moment-timezone@^0.5.13:
-  version "0.5.13"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.13.tgz#99ce5c7d827262eb0f1f702044177f60745d7b90"
-  dependencies:
-    moment ">= 2.9.0"
-
-"moment@>= 2.9.0", moment@^2.19.1:
-  version "2.19.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
-
 mongodb-core@2.1.17:
   version "2.1.17"
   resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-2.1.17.tgz#a418b337a14a14990fb510b923dee6a813173df8"
@@ -4149,17 +4111,11 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
 "ts-framework@file:..":
-  version "1.0.0-rc.1"
+  version "2.0.0-alpha.1"
   dependencies:
-    "@types/async" "^2.0.44"
-    "@types/body-parser" "^1.16.5"
-    "@types/cookie-parser" "^1.4.1"
-    "@types/cors" "^2.8.1"
-    "@types/express" "^4.0.37"
-    "@types/method-override" "^0.0.30"
-    "@types/mongoose" "^4.7.23"
-    "@types/raven" "^2.1.2"
-    "@types/winston" "^2.3.6"
+    "@types/cors" "^2.8.4"
+    "@types/express" "^4.11.1"
+    "@types/winston" "^2.3.9"
     async "^2.5.0"
     base64url "^2.0.0"
     body-parser "^1.18.2"
@@ -4173,10 +4129,9 @@ trim-right@^1.0.1:
     hat "^0.0.3"
     lodash "^4.17.4"
     method-override "^2.3.10"
-    moment "^2.19.1"
-    moment-timezone "^0.5.13"
     mongoose "^4.12.1"
     multer "^1.3.0"
+    pjson "^1.0.9"
     raven "^2.2.1"
     request-ip "^2.0.2"
     rimraf "^2.6.2"

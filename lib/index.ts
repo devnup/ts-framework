@@ -14,17 +14,6 @@ export {
 
 export { default as BaseJob } from './jobs/BaseJob';
 
-export {
-  default as Database,
-  DatabaseOptions,
-  Model,
-  Schema,
-  BaseModel,
-  BaseDAO,
-} from './database';
-
-export { default as Assertion } from './assertion';
-
 export { default as BaseError } from './error/BaseError';
 
 export default Server;
