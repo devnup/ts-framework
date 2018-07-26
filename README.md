@@ -5,16 +5,17 @@ ts-framework
 
 A minimalistic framework for typescript based applications, with async/await and decorators support.
 
+#### DEPRECATION NOTICE
 
+This repository contains the v1 track for the TS Framework, which is now deprecated.
+
+For an updated version checkout the v2 tree on [nxtep-io/ts-framework](https://github.com/nxtep-io/ts-framework) fork.
+
+
+<br/><br/>
 ## Getting Started
 
-### Release Candidate Disclaimer
-
-The current API is considered to be a "Release Candidate". That means that small, potentially breaking 
-changes may still occur. Be sure to use a specific GIT_REV_HASH and a lock file in your project, so you
-won't be immediately affected by such a change.
-
-For example:
+Installing in your repository
 
 ```bash
 # Install using Yarn
